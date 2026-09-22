@@ -1,0 +1,50 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+:root {
+  --color-shades-900: #d1e4fa;
+  --color-shades-800: #a2c9f6;
+  --color-shades-700: #71aef4;
+  --color-shades-600: #4093f2;
+  --color-shades-500: #0d78f2;
+  --color-shades-400: #0860c4;
+  --color-shades-300: #044895;
+  --color-shades-200: #013065;
+  --color-shades-100: #001833;
+  --color-tints-1000: #0072f5;
+  --color-tints-880: #1982fb;
+  --color-tints-750: #3b93f7;
+  --color-tints-630: #5ba3f5;
+  --color-tints-500: #7bb4f4;
+  --color-tints-380: #95c1f4;
+  --color-tints-250: #b2d1f5;
+  --color-tints-130: #cee2f8;
+  --color-tints-0: #e9f2fb;
+}
+
+nav.main-nav {
+    display: flex;
+    height: 3.5rem;
+    padding-left: 0.7rem;
+    align-items: center;
+    gap: 2rem;
+    background: var(--color-shades-300)
+}
+
+nav > h1 {
+    font-size: x-large;
+    color: #e9f2fb;
+}
+
+nav > a {
+    font-size: large;
+    color: #e9f2fb;
+    text-decoration: none;
+}
+
+nav > a:hover {
+    text-decoration: underline;
+}

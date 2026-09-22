@@ -1,0 +1,14 @@
+{% extends 'main.html' %}
+
+{% block title %}Markdown Rendering Test{% endblock %}
+
+
+{% block head %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='github-css.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="markdown-limiter">
+  {{ markdown|safe }}
+</div>
+{% endblock %}

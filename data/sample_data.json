@@ -1,0 +1,7 @@
+[
+    {"timestamp": 1725532080, "user_id": 1, "event": "LOGIN"},
+    {"timestamp": 1725532081, "user_id": 2, "event": "ERROR"},
+    {"timestamp": 1725532082, "user_id": 1, "event": "VIEW_PAGE"},
+    {"timestamp": 1725532083, "user_id": 3, "event": "PURCHASE"},
+    {"timestamp": 1725532084, "user_id": 2, "event": "LOGOUT"}
+]

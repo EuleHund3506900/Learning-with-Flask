@@ -1,0 +1,319 @@
+<!-- ?xml version='1.0' encoding='UTF-8'? -->
+<link href="/github-markdown-css/github-css.css" rel="stylesheet"/>
+<meta charset="utf-8" content="text/html"/>
+<div class="gist">
+<style class="formula-style">
+        svg.gh-md-to-html-formula {
+            fill: black;
+        }
+    </style>
+<div class="gist-file"> <!-- This is the class that is responsible for the boxing! -->
+<div class="gist-data">
+<div class="js-gist-file-update-container js-task-list-container file-box">
+<div class="file" id="user-content-article-sample_md">
+<div class="Box-body readme blob js-code-block-container p-5 p-xl-6" id="user-content-file-docker-image-pull-md-readme" style="margin-left: 40px; margin-right: 40px; margin-top: 20px; margin-bottom: 20px">
+<article class="markdown-body entry-content container-lg" itemprop="text">
+<h1 id="user-content-praxisorientierte-anleitung-erweiterte-installation-und-konfiguration-eines-webservers-auf-debian-mit-git-hugo-und-github-actions-für-cicd">
+<a aria-hidden="true" class="anchor" href="#user-content-praxisorientierte-anleitung-erweiterte-installation-und-konfiguration-eines-webservers-auf-debian-mit-git-hugo-und-github-actions-für-cicd" id="user-content-praxisorientierte-anleitung-erweiterte-installation-und-konfiguration-eines-webservers-auf-debian-mit-git-hugo-und-github-actions-für-cicd" name="user-content-praxisorientierte-anleitung-erweiterte-installation-und-konfiguration-eines-webservers-auf-debian-mit-git-hugo-und-github-actions-für-cicd"><span aria-hidden="true" class="octicon octicon-link"></span></a>Praxisorientierte Anleitung: Erweiterte Installation und Konfiguration eines Webservers auf Debian mit Git, Hugo und GitHub Actions für CI/CD</h1>
+<h2 id="user-content-einführung">
+<a aria-hidden="true" class="anchor" href="#user-content-einführung" id="user-content-einführung" name="user-content-einführung"><span aria-hidden="true" class="octicon octicon-link"></span></a>Einführung</h2>
+<p>Diese erweiterte Anleitung baut auf der grundlegenden Version auf und vertieft die Nutzung von Hugo für die Erstellung statischer Webseiten. Sie integriert GitHub Actions für Continuous Integration/Continuous Deployment (CI/CD), um Änderungen automatisch zu bauen und bereitzustellen. Die Schwerpunkte sind <strong>erweiterte Hugo-Konfiguration</strong>, <strong>Integration mit Git und Webserver</strong> sowie <strong>CI/CD mit GitHub Actions</strong>, um einen automatisierten Workflow für Webentwicklung zu schaffen. Du lernst, detaillierte Hugo-Features anzuwenden, den Server zu konfigurieren und Deployments zu automatisieren.</p>
+<p>Voraussetzungen:</p>
+<ul>
+<li>
+Ein Debian-basiertes System (z. B. Debian 13 oder Ubuntu 24.04).</li>
+<li>
+Ein Terminal (z. B. über <code>Ctrl + T</code> oder ein Terminal-Programm wie <code>bash</code>).</li>
+<li>
+Administratorrechte (<code>sudo</code>) für Installation und Konfiguration.</li>
+<li>
+Internetzugang für Paketinstallationen und GitHub.</li>
+<li>
+Ein GitHub-Konto und Repository.</li>
+<li>
+Grundlegendes Verständnis von Linux-Befehlen, Git und Hugo aus der Basisanleitung.</li>
+<li>
+Sichere Testumgebung (z. B. virtuelle Maschine), um Konfigurationen risikofrei zu testen.</li>
+</ul>
+<h2 id="user-content-grundlegende-befehle">
+<a aria-hidden="true" class="anchor" href="#user-content-grundlegende-befehle" id="user-content-grundlegende-befehle" name="user-content-grundlegende-befehle"><span aria-hidden="true" class="octicon octicon-link"></span></a>Grundlegende Befehle</h2>
+<p>Hier sind die wichtigsten Befehle und Tools, erweitert um detaillierte Hugo-Optionen und CI/CD:</p>
+<ol>
+<li>
+<strong>Erweiterte Hugo-Konfiguration</strong>:<ul>
+<li>
+<code>hugo new site</code>: Erstellt eine neue Hugo-Site.</li>
+<li>
+<code>hugo new</code>: Erstellt Inhalte, Archetypes oder Shortcodes.</li>
+<li>
+<code>hugo server</code>: Startet einen lokalen Entwicklungsserver mit Live-Reloading.</li>
+<li>
+<code>hugo --minify</code>: Baut die Site mit Minifizierung für Produktion.</li>
+<li>
+<code>hugo config</code>: Zeigt die Site-Konfiguration.</li>
+<li>
+Shortcodes: Benutzerdefinierte Vorlagen für wiederverwendbaren Inhalt.</li>
+</ul>
+</li>
+<li>
+<strong>Integration mit Git und Webserver</strong>:<ul>
+<li>
+<code>git submodule</code>: Verwalten von Themes als Submodule.</li>
+<li>
+<code>rsync</code>: Synchronisiert generierte Dateien zum Server-Verzeichnis.</li>
+<li>
+<code>nginx</code>: Webserver für statische Inhalte.</li>
+</ul>
+</li>
+<li>
+<strong>CI/CD mit GitHub Actions</strong>:<ul>
+<li>
+YAML-Dateien in <code>.github/workflows</code>: Definieren Workflows für Build und Deployment.</li>
+<li>
+Actions wie <code>actions/checkout</code>, <code>actions/setup-go</code>: Installieren Abhängigkeiten.</li>
+<li>
+Deployment zu GitHub Pages oder per SSH/rsync zu einem Server.</li>
+</ul>
+</li>
+<li>
+<strong>Sonstige nützliche Befehle</strong>:<ul>
+<li>
+<code>man &lt;befehl&gt;</code>: Zeigt die Hilfeseite eines Befehls an.</li>
+<li>
+<code>sudo</code>: Führt Befehle mit Administratorrechten aus.</li>
+<li>
+<code>curl</code>: Testet den Webserver.</li>
+<li>
+<code>git push</code>: Pusht Änderungen, um CI/CD auszulösen.</li>
+</ul>
+</li>
+</ol>
+<h2 id="user-content-übungen-zum-verinnerlichen-der-befehle">
+<a aria-hidden="true" class="anchor" href="#user-content-übungen-zum-verinnerlichen-der-befehle" id="user-content-übungen-zum-verinnerlichen-der-befehle" name="user-content-übungen-zum-verinnerlichen-der-befehle"><span aria-hidden="true" class="octicon octicon-link"></span></a>Übungen zum Verinnerlichen der Befehle</h2>
+<h3 id="user-content-übung-1-erweiterte-hugo-konfiguration">
+<a aria-hidden="true" class="anchor" href="#user-content-übung-1-erweiterte-hugo-konfiguration" id="user-content-übung-1-erweiterte-hugo-konfiguration" name="user-content-übung-1-erweiterte-hugo-konfiguration"><span aria-hidden="true" class="octicon octicon-link"></span></a>Übung 1: Erweiterte Hugo-Konfiguration</h3>
+<p><strong>Ziel</strong>: Lerne detaillierte Hugo-Setup-Schritte, einschließlich Themes, Archetypes, Shortcodes und Konfiguration.</p>
+<ol>
+<li>
+<p><strong>Schritt 1</strong>: Installiere Hugo (falls nicht vorhanden) und erstelle eine neue Site:</p>
+<div class="highlight"><pre><span></span>sudo<span class="w"> </span>snap<span class="w"> </span>install<span class="w"> </span>hugo<span class="w"> </span>--channel<span class="o">=</span>extended
+hugo<span class="w"> </span>new<span class="w"> </span>site<span class="w"> </span>meineseite<span class="w"> </span>--format<span class="o">=</span>toml
+<span class="nb">cd</span><span class="w"> </span>meineseite
+</pre></div>
+<p>Die Option <code>--format=toml</code> setzt die Konfigurationsdatei auf TOML (alternativ YAML oder JSON).</p>
+</li>
+<li>
+<p><strong>Schritt 2</strong>: Füge ein Theme als Git-Submodule hinzu und konfiguriere es:</p>
+<div class="highlight"><pre><span></span>git<span class="w"> </span>init
+git<span class="w"> </span>submodule<span class="w"> </span>add<span class="w"> </span>https://github.com/theNewDynamic/gohugo-theme-ananke.git<span class="w"> </span>themes/ananke
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"theme = 'ananke'"</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>hugo.toml
+</pre></div>
+<p>Überprüfe die Konfiguration:</p>
+<div class="highlight"><pre><span></span>hugo<span class="w"> </span>config
+</pre></div>
+</li>
+<li>
+<p><strong>Schritt 3</strong>: Erstelle Archetypes für benutzerdefinierte Inhaltsvorlagen:</p>
+<div class="highlight"><pre><span></span>hugo<span class="w"> </span>new<span class="w"> </span>archetypes/posts.md
+nano<span class="w"> </span>archetypes/posts.md
+</pre></div>
+<p>Füge Vorlageninhalt hinzu (z. B. Frontmatter-Variablen):</p>
+<div class="highlight"><pre><span></span>---
+title: "{{ replace .Name "-" " " | title }}"
+date: {{ .Date }}
+draft: true
+<span class="gu">tags: []</span>
+<span class="gu">---</span>
+</pre></div>
+</li>
+<li>
+<p><strong>Schritt 4</strong>: Erstelle Inhalt mit Archetypes und Shortcodes:</p>
+<div class="highlight"><pre><span></span>hugo<span class="w"> </span>new<span class="w"> </span>posts/erster-post.md
+nano<span class="w"> </span>content/posts/erster-post.md
+</pre></div>
+<p>Füge Inhalt hinzu, inklusive eines Shortcodes (z. B. für YouTube):</p>
+<div class="highlight"><pre><span></span>---
+title: "Erster Post"
+<span class="gu">date: 2025-09-03</span>
+<span class="gu">---</span>
+Hier ist ein Video: {{% youtube "video-id" %}}
+</pre></div>
+<p>Erstelle einen benutzerdefinierten Shortcode:</p>
+<div class="highlight"><pre><span></span>mkdir<span class="w"> </span>layouts/shortcodes
+nano<span class="w"> </span>layouts/shortcodes/alert.html
+</pre></div>
+<p>Inhalt:</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"alert"</span><span class="p">&gt;</span>{{ .Inner }}<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</li>
+<li>
+<p><strong>Schritt 5</strong>: Baue und teste die Site lokal mit erweiterten Optionen:</p>
+<div class="highlight"><pre><span></span>hugo<span class="w"> </span>server<span class="w"> </span>-D<span class="w"> </span>--watch<span class="w"> </span>--verbose
+</pre></div>
+<p>Öffne <code>http://localhost:1313</code> im Browser. Die Optionen: <code>-D</code> inkludiert Drafts, <code>--watch</code> für Live-Reloading, <code>--verbose</code> für detaillierte Logs.</p>
+</li>
+<li>
+<p><strong>Schritt 6</strong>: Baue die Produktionsversion:</p>
+<div class="highlight"><pre><span></span>hugo<span class="w"> </span>--minify<span class="w"> </span>--environment<span class="w"> </span>production
+</pre></div>
+<p>Überprüfe das <code>public</code>-Verzeichnis:</p>
+<div class="highlight"><pre><span></span>ls<span class="w"> </span>public
+</pre></div>
+</li>
+</ol>
+<p><strong>Reflexion</strong>: Warum sind Archetypes nützlich? Schaue in <code>hugo help new</code> und überlege, wie Shortcodes die Inhaltswiederverwendung verbessern.</p>
+<h3 id="user-content-übung-2-integration-mit-git-und-webserver-erweitert">
+<a aria-hidden="true" class="anchor" href="#user-content-übung-2-integration-mit-git-und-webserver-erweitert" id="user-content-übung-2-integration-mit-git-und-webserver-erweitert" name="user-content-übung-2-integration-mit-git-und-webserver-erweitert"><span aria-hidden="true" class="octicon octicon-link"></span></a>Übung 2: Integration mit Git und Webserver (Erweitert)</h3>
+<p><strong>Ziel</strong>: Vertiefe die Integration, inklusive Submodules und automatisierter Kopien.</p>
+<ol>
+<li>
+<p><strong>Schritt 1</strong>: Committe und pushe die Hugo-Site zu GitHub:</p>
+<div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>.
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Initiale Hugo-Site mit Theme"</span>
+git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>origin<span class="w"> </span>&lt;deine-github-repo-url&gt;
+git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>main
+</pre></div>
+</li>
+<li>
+<p><strong>Schritt 2</strong>: Konfiguriere Nginx für die Site (aus Basisanleitung erweitert):</p>
+<div class="highlight"><pre><span></span>sudo<span class="w"> </span>nano<span class="w"> </span>/etc/nginx/sites-available/default
+</pre></div>
+<p>Füge Caching für statische Assets hinzu:</p>
+<pre><code>server {
+    listen 80;
+    root /var/www/meineseite/html;
+    index index.html;
+    location ~* \.(jpg|jpeg|png|gif|ico|css|js)$ {
+        expires 30d;
+    }
+}
+</code></pre><p>Teste und reload:</p>
+<div class="highlight"><pre><span></span>sudo<span class="w"> </span>nginx<span class="w"> </span>-t
+sudo<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="w"> </span>nginx
+</pre></div>
+</li>
+<li>
+<p><strong>Schritt 3</strong>: Deploye manuell mit rsync, inklusive Löschung alter Dateien:</p>
+<div class="highlight"><pre><span></span>rsync<span class="w"> </span>-av<span class="w"> </span>--delete<span class="w"> </span>public/<span class="w"> </span>/var/www/meineseite/html/
+</pre></div>
+</li>
+</ol>
+<p><strong>Reflexion</strong>: Wie handhabt <code>git submodule</code> Themes? Schaue in <code>man git-submodule</code> und überlege Sicherheitsaspekte für den Webserver.</p>
+<h3 id="user-content-übung-3-cicd-mit-github-actions">
+<a aria-hidden="true" class="anchor" href="#user-content-übung-3-cicd-mit-github-actions" id="user-content-übung-3-cicd-mit-github-actions" name="user-content-übung-3-cicd-mit-github-actions"><span aria-hidden="true" class="octicon octicon-link"></span></a>Übung 3: CI/CD mit GitHub Actions</h3>
+<p><strong>Ziel</strong>: Integriere GitHub Actions für automatisches Bauen und Deployen der Hugo-Site.</p>
+<ol>
+<li>
+<p><strong>Schritt 1</strong>: Erstelle ein GitHub-Repository (falls nicht vorhanden) und pushe deine lokale Site.</p>
+</li>
+<li>
+<p><strong>Schritt 2</strong>: Konfiguriere GitHub Pages in den Repository-Einstellungen: Setze Source auf "GitHub Actions".</p>
+</li>
+<li>
+<p><strong>Schritt 3</strong>: Erstelle den Workflow-Datei auf GitHub oder lokal:</p>
+<div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>.github/workflows
+nano<span class="w"> </span>.github/workflows/hugo-deploy.yaml
+</pre></div>
+<p>Füge eine erweiterte YAML-Konfiguration ein (basierend auf Best Practices und Docs):</p>
+<div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Build and Deploy Hugo Site</span>
+<span class="nt">on</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">push</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">main</span><span class="w"> </span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">workflow_dispatch</span><span class="p">:</span>
+<span class="nt">permissions</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">contents</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">read</span>
+<span class="w">  </span><span class="nt">pages</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">write</span>
+<span class="w">  </span><span class="nt">id-token</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">write</span>
+<span class="nt">concurrency</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pages</span>
+<span class="w">  </span><span class="nt">cancel-in-progress</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">    </span><span class="nt">env</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">HUGO_VERSION</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.149.0</span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Checkout</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v5</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">submodules</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">recursive</span>
+<span class="w">          </span><span class="nt">fetch-depth</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Setup Hugo</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">curl -sLJO "https://github.com/gohugoio/hugo/releases/download/v${{ env.HUGO_VERSION }}/hugo_extended_${{ env.HUGO_VERSION }}_linux-amd64.tar.gz"</span>
+<span class="w">          </span><span class="no">tar -xf "hugo_extended_${{ env.HUGO_VERSION }}_linux-amd64.tar.gz" hugo</span>
+<span class="w">          </span><span class="no">mv hugo /usr/local/bin/</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Build Site</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hugo --minify</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Upload Artifact</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/upload-pages-artifact@v3</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./public</span>
+<span class="w">  </span><span class="nt">deploy</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">github-pages</span>
+<span class="w">      </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ steps.deployment.outputs.page_url }}</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">    </span><span class="nt">needs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">build</span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deploy to GitHub Pages</span>
+<span class="w">        </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deployment</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/deploy-pages@v4</span>
+</pre></div>
+<p>Committe und pushe die Datei.</p>
+</li>
+<li>
+<p><strong>Schritt 4</strong>: Teste den Workflow: Mache eine Änderung, pushe und überprüfe unter "Actions" auf GitHub.</p>
+</li>
+<li>
+<p><strong>Schritt 5</strong>: Für Deployment zu deinem Debian-Server (anstatt GitHub Pages): Erweitere den Workflow mit SSH-Deployment. Generiere SSH-Schlüssel, füge den öffentlichen Schlüssel zu <code>~/.ssh/authorized_keys</code> auf dem Server hinzu und speichere den privaten als GitHub Secret (<code>DEPLOY_KEY</code>).
+Ersetze den Deploy-Job durch:</p>
+<div class="highlight"><pre><span></span><span class="nt">deploy</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">  </span><span class="nt">needs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">build</span>
+<span class="w">  </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Download Artifact</span>
+<span class="w">      </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/download-artifact@v4</span>
+<span class="w">      </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pages-artifact</span>
+<span class="w">        </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./public</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deploy to Server</span>
+<span class="w">      </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">appleboy/scp-action@v0.1.7</span>
+<span class="w">      </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.SERVER_HOST }}</span>
+<span class="w">        </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.SERVER_USER }}</span>
+<span class="w">        </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.DEPLOY_KEY }}</span>
+<span class="w">        </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./public/*</span>
+<span class="w">        </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/www/meineseite/html/</span>
+<span class="w">        </span><span class="nt">strip_components</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+</pre></div>
+</li>
+<li>
+<p><strong>Schritt 6</strong>: Überprüfe das Deployment: Pushe eine Änderung und prüfe den Server.</p>
+</li>
+</ol>
+<p><strong>Reflexion</strong>: Warum ist Caching in Actions wichtig? Schaue in die GitHub Docs und überlege, wie du Tests in den Workflow integrierst.</p>
+<h2 id="user-content-tipps-für-den-erfolg">
+<a aria-hidden="true" class="anchor" href="#user-content-tipps-für-den-erfolg" id="user-content-tipps-für-den-erfolg" name="user-content-tipps-für-den-erfolg"><span aria-hidden="true" class="octicon octicon-link"></span></a>Tipps für den Erfolg</h2>
+<ul>
+<li>
+<strong>Übe regelmäßig</strong>: Experimentiere mit Hugo-Modulen und Shortcodes.</li>
+<li>
+<strong>Best Practices</strong>: Verwende Submodules für Themes, cache Abhängigkeiten in Actions, und minifiziere für Performance.</li>
+<li>
+<strong>Fehlerbehebung</strong>: Überwache Action-Logs auf GitHub; nutze <code>hugo --debug</code> für Hugo-Fehler.</li>
+<li>
+<strong>Sicherheit</strong>: Verwende Secrets für SSH-Schlüssel; aktiviere HTTPS auf Nginx.</li>
+<li>
+<strong>Erweiterungen</strong>: Integriere Hugo-Module statt Themes, oder AWS/Netlify für alternatives Hosting.</li>
+</ul>
+<h2 id="user-content-fazit">
+<a aria-hidden="true" class="anchor" href="#user-content-fazit" id="user-content-fazit" name="user-content-fazit"><span aria-hidden="true" class="octicon octicon-link"></span></a>Fazit</h2>
+<p>Diese erweiterte Anleitung hat Hugo detailliert behandelt und GitHub Actions für CI/CD integriert. Experimentiere mit komplexen Workflows und Features wie Hugo-Pipes für Asset-Verarbeitung.</p>
+</article>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
