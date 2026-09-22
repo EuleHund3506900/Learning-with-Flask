@@ -5,9 +5,17 @@
 
 {% block head %}
   <link rel="stylesheet" href="{{ url_for('static', filename='github-css.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='lesson.css') }}">
 {% endblock %}
 
 {% block content %}
+<div class="lesson-header">
+  <h2>Lektion 00</h2>
+  <div>
+    <button class="outline">Zurück</button>
+    <button class="full">Weiter</button>
+  </div>
+</div>
 <div class="markdown-limiter">
   {{ markdown|safe }}
 </div>

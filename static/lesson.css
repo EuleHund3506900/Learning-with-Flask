@@ -1,0 +1,19 @@
+.lesson-header {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem;
+    border: rgb(216, 216, 216) 1px solid;
+    border-radius: 0.2rem;
+    margin-top: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .lesson-header {
+        max-width: 54.5dvw;
+        margin: 0 auto;
+        margin-top: 1.5rem;
+        flex-direction: row;
+    }
+}

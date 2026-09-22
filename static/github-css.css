@@ -1882,10 +1882,9 @@ span.linenos.special {
 @media (min-width: 768px) {
     .gist-file {
     max-width: 60%; 
-
-}
+    }
 }
 
 .markdown-limiter {
-    padding: 2rem;
+    padding: 1.5rem;
 }
