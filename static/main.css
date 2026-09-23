@@ -79,6 +79,17 @@ button.full:active {
     transform: translateY(0px)
 }
 
+button.full:disabled {
+    background: var(--color-shades-900);
+    cursor: not-allowed;
+}
+button.full:disabled:hover {
+    transform: translateY(0px);
+}
+
+.hidden {
+    display: none;
+}
 
 button.outline {
     background: none;

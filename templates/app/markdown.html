@@ -10,9 +10,11 @@
 
 {% block content %}
 <div class="lesson-header">
-  <h2>{{ file_name.replace(".md", "") }}</h2>
+  <h2 class="lesson-title">{{ file_name.replace(".md", "") }}</h2>
   <div>
+    <button class="ghost reset-button hidden"><i class="ti ti-reload"></i> Fortschritt zurücksetzen</button>
     <button class="outline" onClick="window.history.back()">Zurück</button>
+    
     {% if show_navigation %}
       <button class="full">Weiter</button>
     {% endif %}
@@ -25,10 +27,11 @@
   <div></div>
   <div>
     <button class="ghost"><i class="ti ti-star"></i>  Favorit</button>
-    <button class="full"><i class="ti ti-check"></i>  Fertig</button>
+    <button class="full"><i class="ti ti-check"></i>  Abschließen</button>
     {% if show_navigation %}
       <button class="full">Weiter</button>
     {% endif %}
   </div>
 </div>
+<script src="{{ url_for('static', filename='scripts/lesson.js') }}"></script>
 {% endblock %}

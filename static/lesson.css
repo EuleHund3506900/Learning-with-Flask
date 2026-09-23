@@ -18,6 +18,12 @@
     margin-top: -2rem;
 }
 
+.lesson-complete {
+    color: green;
+    font-size: small;
+    margin-top: 0.5rem;
+}
+
 @media (min-width: 768px) {
     .lesson-header {
         max-width: 54.5dvw;
