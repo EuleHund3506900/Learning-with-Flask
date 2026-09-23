@@ -1,9 +1,21 @@
 {% extends 'main.html' %}
 
 {% block header %}
-  <h2>{% block title %}Kurse{% endblock %}</h2>
+  <h2 class="courses-header">{% block title %}Alle Kurse{% endblock %}</h2>
+{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='courses.css') }}">
 {% endblock %}
 
 {% block content %}
-  <p>Kurse</p>
+  <div class="courses-list-container">
+    {% for name in folder_information["names"] %}
+      <a href="{{ url_for('app.folder', folderpath=folder_information['paths'][loop.index0]) }}" class="course-item">
+        <h3>{{ name }}</h3>
+        <i class="ti ti-chevron-right"></i>
+      </a>
+    {% endfor %}
+
+  </div>
 {% endblock %}

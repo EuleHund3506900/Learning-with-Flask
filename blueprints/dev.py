@@ -2,10 +2,14 @@ from flask import Blueprint, render_template, url_for
 import gh_md_to_html
 import os
 
+from blueprints.utils.files import discover_files
+
 dev_bp = Blueprint('dev', __name__, url_prefix='/dev')
 
 @dev_bp.route("/md")
 def md():
+    discover_files('local_data', '.md')
+
     file_name = 'sample_md.md'
 
     html = gh_md_to_html.main('data/' + file_name, core_converter="OFFLINE", )
@@ -18,6 +22,5 @@ def md():
 
     # Parse the HTML to extract the content within the first <div> tag and remove the head
     parsedHTML = "<"+ html.replace(html.split('div')[0], "")
-    print(parsedHTML)
 
     return render_template('app/markdown.html', markdown=(parsedHTML) )

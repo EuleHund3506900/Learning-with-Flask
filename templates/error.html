@@ -1,0 +1,16 @@
+{% extends 'main.html' %}
+
+{% block title %}Error{% endblock %}
+{% block head %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='error.css') }}">
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h3>Da ist etwas schief gelaufen...</h3>
+    <p>Fehlercode: {{ error_code }}</p>
+    <p>{{ error_message }}</p>
+    <button class="outline" onclick="window.history.back()">Zurück</button>
+
+  </div>
+{% endblock %}

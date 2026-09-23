@@ -1,9 +1,41 @@
 {% extends 'main.html' %}
 
 {% block header %}
-  <h2>{% block title %}Home{% endblock %}</h2>
+<h2 class="header">{% block title %}Willkommen, was wirst du heute lernen?{% endblock %}</h2>
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
 {% endblock %}
 
 {% block content %}
-<p>Content</p>
+<div class="container">
+  <div class="home-content-item">
+    <h3>Learning & Übungen</h3>
+    <br />
+    <p>Dieses Repository ist eine Sammlung von praxisorientierten Anleitungen und Übungen zu verschiedenen
+      Themenbereichen der IT-Infrastruktur, Softwareentwicklung und DevOps. Es ist als Lernplattform konzipiert, die
+      Ihnen hilft, grundlegende bis fortgeschrittene Konzepte durch praktische Beispiele zu verinnerlichen.
+
+      Aktuell sind wir bei <strong>58</strong> verschiedenen Themen!!</p>
+  </div>
+  <div>
+    <div class="home-content-item">
+      <h3>Kurse</h3>
+      <br />
+      <p>Hier findest du alle verfügbaren Kurse.</p>
+      <a href="{{ url_for('app.courses') }}" class="button">Zu den Kursen <i class="ti ti-chevron-right"></i></a>
+    </div>
+  </div>
+  <div>
+    <div class="home-content-item">
+      <h3>Gut zu wissen</h3>
+      <br />
+      <p>Hier findest du nützliches Wissen über die Welt der ITler.</p>
+      {% for path in files['paths'] %}
+        <a href="{{ url_for('app.file', filepath=path) }}" class="file"><div><i class="ti ti-file file"></i>{{ files['names'][loop.index0] }}</div> <i class="ti ti-chevron-right"></i></a>
+      {% endfor %}
+    </div>
+  </div>
+</div>
 {% endblock %}

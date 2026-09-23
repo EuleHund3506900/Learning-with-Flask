@@ -3,15 +3,15 @@
 <head>
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='tabler-icons-300.min.css') }}">
     {% block head %} {% endblock %}
 </head>
 
 <body>
     <nav class="main-nav">
         <h1>Learning</h1>
-        <a href="{{ url_for('app.home') }}">Home</a>
+        <a href="{{ url_for('app.home') }}"><i class="ti ti-home"></i></a>
         <a href="{{ url_for('app.courses') }}">Kurse</a>
-        <a href="{{ url_for('dev.md') }}">Markdown Demo</a>
     </nav>
     <section class="content">
         <header>
