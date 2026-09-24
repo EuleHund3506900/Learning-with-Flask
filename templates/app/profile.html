@@ -1,0 +1,12 @@
+{% extends 'main.html' %}
+
+  {% block title %}Profil{% endblock %}
+
+
+{% block head %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}">
+{% endblock %}
+
+{% block content %}
+  {{ name }}
+{% endblock %}

@@ -9,13 +9,15 @@
 {% endblock %}
 
 {% block content %}
-  <div class="courses-list-container">
+  <div class="courses-list-container" aria-label="Kursübersicht">
     {% for name in folder_information["names"] %}
       <a href="{{ url_for('app.folder', folderpath=folder_information['paths'][loop.index0]) }}" class="course-item">
-        <h3>{{ name }}</h3>
-        <i class="ti ti-chevron-right"></i>
+        <div class="course-item-content">
+          <span class="course-badge">Kurs</span>
+          <h3>{{ name }}</h3>
+        </div>
+        <i class="ti ti-chevron-right" aria-hidden="true"></i>
       </a>
     {% endfor %}
-
   </div>
 {% endblock %}

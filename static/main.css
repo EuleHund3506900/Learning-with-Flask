@@ -4,6 +4,12 @@
     font-family: Nunito, sans-serif;
 }
 
+body {
+    min-width: 320px;
+    background: var(--color-tints-0);
+    color: var(--color-shades-100);
+}
+
 @font-face {
     font-family: Nunito;
     src: url('./fonts/NunitoSans.ttf') format('truetype');
@@ -36,27 +42,59 @@
 
 nav.main-nav {
     display: flex;
-    height: 3.5rem;
-    padding-left: 0.7rem;
+    min-height: 3.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-sizing: border-box;
+    padding: 0.5rem 1.2rem;
+    justify-content: space-between;
     align-items: center;
-    gap: 2rem;
     background: var(--color-shades-300);
-    
+    box-shadow: 0 0.35rem 1rem rgba(0, 24, 51, 0.14);
 }
 
-nav > h1 {
-    font-size: x-large;
-    color: #e9f2fb;
+div.nav-header {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.45rem;
 }
 
-nav > a {
-    font-size: large;
-    color: #e9f2fb;
+.nav-brand {
+    margin-right: 0.65rem;
+    color: #ffffff;
+    font-size: 1.25rem;
+    letter-spacing: 0.01em;
+}
+
+.nav-link {
+    display: inline-flex;
+    min-height: 2.35rem;
+    align-items: center;
+    padding: 0 0.75rem;
+    border: 1px solid transparent;
+    border-radius: 0.35rem;
+    color: var(--color-tints-0);
+    font-size: 0.95rem;
     text-decoration: none;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 
-nav > a:hover {
-    transform: translateY(-3px);
+.nav-link:hover,
+.nav-link:focus-visible {
+    border-color: rgba(233, 242, 251, 0.3);
+    background: rgba(233, 242, 251, 0.12);
+    color: #ffffff;
+    outline: none;
+}
+
+.nav-icon-link {
+    width: 2.35rem;
+    justify-content: center;
+    padding: 0;
+    font-size: 1.1rem;
 }
 
 button.full {
@@ -91,6 +129,34 @@ button.full:disabled:hover {
     display: none;
 }
 
+.content {
+    min-height: calc(100vh - 3.5rem);
+}
+
+@media (max-width: 30rem) {
+    nav.main-nav {
+        padding-right: 0.75rem;
+        padding-left: 0.75rem;
+    }
+
+    div.nav-header {
+        gap: 0.2rem;
+    }
+
+    .nav-brand {
+        margin-right: 0.2rem;
+    }
+
+    .nav-link {
+        padding: 0 0.55rem;
+    }
+
+    .nav-icon-link {
+        width: 2.1rem;
+        padding: 0;
+    }
+}
+
 button.outline {
     background: none;
     color: var(--color-shades-300);
@@ -113,6 +179,14 @@ button.outline:active {
     transform: translateY(0px)
 }
 
+button.outline:disabled {
+    background: var(--color-shades-900);
+    cursor: not-allowed;
+}
+button.outline:disabled:hover {
+    transform: translateY(0px);
+}
+
 
 button.ghost {
     background: none;
@@ -131,4 +205,12 @@ button.ghost:hover {
 
 button.ghost:active {
     transform: translateY(0px)
+}
+
+button.ghost:disabled {
+    background: var(--color-shades-900);
+    cursor: not-allowed;
+}
+button.ghost:disabled:hover {
+    transform: translateY(0px);
 }

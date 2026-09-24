@@ -1,14 +1,16 @@
 from flask import Flask, render_template, redirect, url_for
 from blueprints.app import app_bp
 from blueprints.dev import dev_bp
+from blueprints.auth import auth_bp
+from database.db import create_user, init_db, verify_user
 
 app = Flask(__name__)
 
 
 @app.route("/")
 def hello():
-  print(app.url_map)
-  return redirect(url_for("app.courses"))
+  res = verify_user("test3@example.com", "password1233")
+  return str(res)
 
 
 @app.route("/auth/register/")
@@ -25,7 +27,9 @@ app.register_blueprint(app_bp)
 # register all dev routes from blueprints/dev.py
 app.register_blueprint(dev_bp)
 
+# register all auth routes from blueprints/auth.py
+app.register_blueprint(auth_bp)
 
 if __name__ == "__main__":
-  
+  init_db()
   app.run(debug=True)

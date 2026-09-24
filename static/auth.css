@@ -1,0 +1,132 @@
+.auth-page {
+	display: grid;
+	min-height: calc(100vh - 3.5rem);
+	place-items: center;
+	padding: clamp(2rem, 6vw, 5rem) 1.25rem;
+	background:
+		radial-gradient(circle at 15% 20%, rgba(64, 147, 242, 0.18), transparent 28rem),
+		linear-gradient(135deg, var(--color-tints-0), #ffffff 55%, var(--color-tints-130));
+}
+
+.auth-panel {
+	width: min(100%, 29rem);
+	padding: clamp(1.75rem, 5vw, 3rem);
+	border: 1px solid rgba(1, 48, 101, 0.1);
+	border-radius: 0.75rem;
+	background: rgba(255, 255, 255, 0.9);
+	box-shadow: 0 1.5rem 4rem rgba(1, 48, 101, 0.14);
+}
+
+.auth-intro {
+	margin-bottom: 2rem;
+}
+
+.auth-kicker {
+	display: block;
+	margin-bottom: 0.65rem;
+	color: var(--color-shades-500);
+	font-size: 0.75rem;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+.auth-intro h2 {
+	color: var(--color-shades-200);
+	font-size: clamp(1.6rem, 4vw, 2rem);
+	line-height: 1.15;
+}
+
+.auth-intro p {
+	margin-top: 0.7rem;
+	color: #4f6680;
+	line-height: 1.5;
+}
+
+.auth-form {
+	display: grid;
+	gap: 1.1rem;
+}
+
+.form-field {
+	display: grid;
+	gap: 0.45rem;
+}
+
+.form-field label {
+	color: var(--color-shades-200);
+	font-size: 0.88rem;
+	font-weight: 700;
+}
+
+.form-field input {
+	width: 100%;
+	box-sizing: border-box;
+	min-height: 2.8rem;
+	padding: 0.7rem 0.8rem;
+	border: 1px solid var(--color-gray-300);
+	border-radius: 0.35rem;
+	background: #ffffff;
+	color: var(--color-shades-100);
+	font: inherit;
+	transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form-field input:focus {
+	border-color: var(--color-shades-500);
+	outline: none;
+	box-shadow: 0 0 0 3px rgba(13, 120, 242, 0.16);
+}
+
+.auth-submit {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	min-height: 2.9rem;
+	margin-top: 0.45rem;
+	padding: 0.7rem 1rem;
+	border: 0;
+	border-radius: 0.35rem;
+	background: var(--color-shades-300);
+	color: #ffffff;
+	cursor: pointer;
+	font: inherit;
+	font-weight: 700;
+	transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.auth-submit:hover {
+	background: var(--color-shades-400);
+	transform: translateY(-1px);
+}
+
+.auth-submit:active {
+	transform: translateY(0);
+}
+
+.auth-error {
+	margin-bottom: 1.25rem;
+	padding: 0.75rem 0.85rem;
+	border-left: 3px solid #c0392b;
+	background: #fff1ef;
+	color: #8e2b20;
+	font-size: 0.9rem;
+}
+
+.auth-footer {
+    margin-top: 1.5rem;
+    text-align: center;
+    color: var(--color-shades-200);
+    font-size: 0.85rem;
+}
+
+.auth-footer > a {
+    color: var(--color-shades-200);
+}
+
+@media (max-width: 30rem) {
+	.auth-panel {
+		padding: 1.5rem;
+	}
+}

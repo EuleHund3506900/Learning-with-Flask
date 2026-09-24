@@ -1,7 +1,10 @@
 {% extends 'main.html' %}
 
 {% block header %}
-<h2 class="header">{% block title %}Willkommen, was wirst du heute lernen?{% endblock %}</h2>
+<div class="home-heading">
+  <span class="home-kicker">Dein Lernbereich</span>
+  <h2 class="header">{% block title %}Willkommen, was wirst du heute lernen?{% endblock %}</h2>
+</div>
 {% endblock %}
 
 {% block head %}
@@ -9,42 +12,63 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
-  <div class="home-content-item">
-    <h3>Learning & Übungen</h3>
-    <br />
-    <p>Dieses Repository ist eine Sammlung von praxisorientierten Anleitungen und Übungen zu verschiedenen
-      Themenbereichen der IT-Infrastruktur, Softwareentwicklung und DevOps. Es ist als Lernplattform konzipiert, die
-      Ihnen hilft, grundlegende bis fortgeschrittene Konzepte durch praktische Beispiele zu verinnerlichen.
+<main class="dashboard-grid">
+  <section class="dashboard-card dashboard-overview">
+    <div class="dashboard-card-heading">
+      <span class="dashboard-icon"><i class="ti ti-book-2" aria-hidden="true"></i></span>
+      <div>
+        <span class="card-kicker">Übersicht</span>
+        <h3>Learning & Übungen</h3>
+      </div>
+    </div>
+    <div class="overview-copy">
+      <p>Dieses Repository ist eine Sammlung von praxisorientierten Anleitungen und Übungen zu verschiedenen
+        Themenbereichen der IT-Infrastruktur, Softwareentwicklung und DevOps. Es ist als Lernplattform konzipiert, die
+        Ihnen hilft, grundlegende bis fortgeschrittene Konzepte durch praktische Beispiele zu verinnerlichen.</p>
+      <strong class="topic-count"><span class="topic-label">Aktuell sind wir bei</span>58 <span>verschiedenen Themen!!</span></strong>
+    </div>
+  </section>
 
-      Aktuell sind wir bei <strong>58</strong> verschiedenen Themen!!</p>
-  </div>
-  <div>
-    <div class="home-content-item">
-      <h3>Kurse</h3>
-      <br />
-      <p>Hier findest du alle verfügbaren Kurse.</p>
-      <a href="{{ url_for('app.courses') }}" class="button">Zu den Kursen <i class="ti ti-chevron-right"></i></a>
+  <section class="dashboard-card course-card">
+    <div class="dashboard-card-heading">
+      <span class="dashboard-icon"><i class="ti ti-school" aria-hidden="true"></i></span>
+      <div>
+        <span class="card-kicker">Weiterlernen</span>
+        <h3>Kurse</h3>
+      </div>
     </div>
-  </div>
-  <div>
-    <div class="home-content-item">
-      <h3>Gut zu wissen</h3>
-      <br />
-      <p>Hier findest du nützliches Wissen über die Welt der ITler.</p>
-      {% for path in files['paths'] %}
-        <a href="{{ url_for('app.file', filepath=path) }}" class="file"><div><i class="ti ti-file file"></i>{{ files['names'][loop.index0] }}</div> <i class="ti ti-chevron-right"></i></a>
-      {% endfor %}
+    <p>Hier findest du alle verfügbaren Kurse.</p>
+    <a href="{{ url_for('app.courses') }}" class="button">Zu den Kursen <i class="ti ti-arrow-up-right" aria-hidden="true"></i></a>
+  </section>
+
+  <section class="dashboard-card favorite-card favorite-container">
+    <div class="dashboard-card-heading">
+      <span class="dashboard-icon"><i class="ti ti-star" aria-hidden="true"></i></span>
+      <div>
+        <span class="card-kicker">Gespeichert</span>
+        <h3>Favoriten</h3>
+      </div>
     </div>
-  </div>
-  <div>
-    <div class="home-content-item favorite-container">
-      <h3>Favoriten</h3>
-      <br />
-      <p>Du hast noch keine Favoriten hinzugefügt.</p>
+    <div class="favorite-content">
       
     </div>
-  </div>
-</div>
+  </section>
+
+  <section class="dashboard-card resource-card">
+    <div class="dashboard-card-heading">
+      <span class="dashboard-icon"><i class="ti ti-bulb" aria-hidden="true"></i></span>
+      <div>
+        <span class="card-kicker">Aus der Sammlung</span>
+        <h3>Gut zu wissen</h3>
+      </div>
+    </div>
+    <p>Hier findest du nützliches Wissen über die Welt der ITler.</p>
+    <div class="resource-list">
+      {% for path in files['paths'] %}
+        <a href="{{ url_for('app.file', filepath=path) }}" class="file"><span><i class="ti ti-file file" aria-hidden="true"></i>{{ files['names'][loop.index0] }}</span> <i class="ti ti-chevron-right" aria-hidden="true"></i></a>
+      {% endfor %}
+    </div>
+  </section>
+</main>
 <script src="{{ url_for('static', filename='scripts/home.js') }}"></script>
 {% endblock %}

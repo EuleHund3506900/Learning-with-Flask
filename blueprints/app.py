@@ -62,3 +62,7 @@ def folder(folderpath):
   folders['paths'] = [path for name, path in sorted_folders]
 
   return render_template('app/folder.html', folder_name=folder_name, files=files, folders=folders)
+
+@app_bp.route('/profile') 
+def profile():
+  return render_template('app/profile.html', name="test")

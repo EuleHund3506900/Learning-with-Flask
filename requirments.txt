@@ -1,0 +1,6 @@
+flask
+gh_md_to_html
+beautifulsoup4
+pygments_csv_lexer
+bcrypt
+flask-wtf

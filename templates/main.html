@@ -8,10 +8,17 @@
 </head>
 
 <body>
-    <nav class="main-nav">
-        <h1>Learning</h1>
-        <a href="{{ url_for('app.home') }}"><i class="ti ti-home"></i></a>
-        <a href="{{ url_for('app.courses') }}">Kurse</a>
+    <nav class="main-nav" aria-label="Hauptnavigation">
+        <div class="nav-header">
+            <h1 class="nav-brand">Learning</h1>
+            <a class="nav-link nav-icon-link" href="{{ url_for('app.home') }}" aria-label="Startseite"><i class="ti ti-home" aria-hidden="true"></i></a>
+            <a class="nav-link" href="{{ url_for('app.courses') }}">Kurse</a>
+        </div>
+        <div class="nav-header">
+            <a class="nav-link nav-icon-link" href="{{ url_for('app.profile') }}" aria-label="Profil"><i class="ti ti-user" aria-hidden="true"></i></a>
+            <a class="nav-link nav-icon-link" href="{{ url_for('app.home') }}" aria-label="Einstellungen"><i class="ti ti-settings" aria-hidden="true"></i></a>
+
+        </div>
     </nav>
     <section class="content">
         <header>

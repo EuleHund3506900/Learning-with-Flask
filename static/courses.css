@@ -1,16 +1,15 @@
 .courses-list-container {
-    width: 100%;
+    width: min(100%, 52rem);
     display: grid;
-    grid-template-rows: repeat(auto-fit, 1fr);
-    gap: 20px;
-    padding: 20px;
-    margin: 0 auto;
+    gap: 1rem;
+    padding: clamp(1rem, 2.5vw, 2rem);
+    margin: 1.5rem auto 0;
 }
 
 .courses-header {
     text-align: center;
     margin-top: 1.5rem;
-    font-size: x-large;
+    font-size: clamp(1.5rem, 2vw, 2rem);
     color: var(--color-shades-300);
 }
 
@@ -18,37 +17,65 @@ a.course-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 1rem;
     text-decoration: none;
     color: inherit;
-    border: 1.5px solid var(--color-gray-200);
-    border-radius: 0.4rem;
-    padding: 1rem;
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    background: rgba(255, 255, 255, 0.45);
+    border: 1px solid rgba(4, 72, 149, 0.12);
+    border-radius: 0.9rem;
+    padding: 1rem 1.1rem;
+    box-shadow: 0 0.35rem 1rem rgba(0, 24, 51, 0.06);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
 }
 
-a.course-item:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+a.course-item:hover,
+a.course-item:focus-visible {
+    transform: translateY(-2px);
+    border-color: rgba(4, 72, 149, 0.25);
+    box-shadow: 0 0.6rem 1.4rem rgba(0, 24, 51, 0.1);
+    outline: none;
+}
+
+.course-item-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.course-badge {
+    display: inline-flex;
+    width: fit-content;
+    align-items: center;
+    padding: 0.2rem 0.5rem;
+    border-radius: 999px;
+    background: var(--color-tints-130);
+    color: var(--color-shades-300);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
 }
 
 a.course-item h3 {
     margin: 0;
-    font-size: larger;
-    color: black;
+    font-size: clamp(1.05rem, 2vw, 1.35rem);
+    color: var(--color-shades-200);
+    font-weight: 700;
 }
 
 a.course-item i {
-    font-size: 1.5rem;
-    color: black;
+    font-size: 1.4rem;
+    color: var(--color-shades-300);
+    flex-shrink: 0;
 }
 
-a.course-item:hover i {
-    font-weight: bold;
-}
-
-@media (min-width: 768px) {
+@media (max-width: 480px) {
     .courses-list-container {
-        max-width: 54.5dvw;
-        margin: 0 auto;
+        padding: 0.8rem;
+        margin-top: 1rem;
+    }
+
+    a.course-item {
+        padding: 0.85rem 0.9rem;
     }
 }
