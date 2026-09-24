@@ -41,7 +41,10 @@ def file(filepath):
   # Parse the HTML to extract the content within the first <div> tag and remove the head
   parsedHTML = "<"+ html.replace(html.split('div')[0], "")
 
-  tree_path = 'local_data/Learning/' + filepath.split("Learning/")[1].split("/")[0]
+  if filepath.split("/")[-2] == "Learning":
+    tree_path = 'local_data/Learning/'
+  else:
+    tree_path = 'local_data/Learning/' + filepath.split("Learning/")[1].split("/")[0]
   learning_tree = discover_learning_tree(tree_path)
 
   return render_template(

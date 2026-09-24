@@ -320,3 +320,7 @@ i.file {
         padding-left: 0.75rem;
     }
 }
+
+.home-content-item {
+   background: white;
+}

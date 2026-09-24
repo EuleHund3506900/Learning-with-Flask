@@ -43,10 +43,7 @@ def discover_learning_tree(path, extension='.md'):
                 "path": entry_path,
                 "children": discover_learning_tree(entry_path, extension),
             })
-        elif name.endswith(extension) and name not in EXCLUDED_FILES:
-            print(path.split("/").pop())
-            if(path.split("/").pop() == "Learning"):
-                continue    
+        elif name.endswith(extension) and name not in EXCLUDED_FILES:  
             tree.append({
                 "type": "file",
                 "name": name,

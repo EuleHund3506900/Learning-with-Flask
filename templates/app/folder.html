@@ -12,12 +12,23 @@
 <div class="folder-container">
   <div>
     <div class="home-content-item">
-        <button class="ghost" onClick="window.history.back()"><i class="ti ti-chevron-left"></i> Zurück</button>
+      <button class="ghost" onClick="window.history.back()"><i class="ti ti-chevron-left"></i> Zurück</button>
       {% for path in folders['paths'] %}
-        <a href="{{ url_for('app.folder', folderpath=path) }}" class="file"><div class="file-name"><i class="ti ti-folder file"></i><p>{{ folders['names'][loop.index0] }}</p></div> <i class="ti ti-chevron-right"></i> </a>
+      <a href="{{ url_for('app.folder', folderpath=path) }}" class="file">
+        <div class="file-name"><i class="ti ti-folder file"></i>
+          <p>{{ folders['names'][loop.index0] }}</p>
+        </div> <i class="ti ti-chevron-right"></i>
+      </a>
       {% endfor %}
       {% for path in files['paths'] %}
-        <a href="{{ url_for('app.file', filepath=path) }}" class="file file-container" data-filepath="{{ path }}"><div class="file-name"><i class="ti ti-file file"></i><p>{{ files['names'][loop.index0] }}</p></div> <div class="file-badge-container"><i class="ti ti-check lesson-status-icon" data-status-indicator="complete" aria-label="Abgeschlossen"></i><i class="ti ti-star lesson-status-icon" data-status-indicator="favorite" aria-label="Favorit"></i></div><i class="ti ti-chevron-right"></i></a>
+      <a href="{{ url_for('app.file', filepath=path) }}" class="file file-container" data-filepath="{{ path }}">
+        <div class="file-name"><i class="ti ti-file file"></i>
+          <p>{{ files['names'][loop.index0] }}</p>
+        </div>
+        <div class="file-badge-container"><i class="ti ti-star lesson-status-icon" data-status-indicator="favorite"
+            aria-label="Favorit"></i><i class="ti ti-check lesson-status-icon" data-status-indicator="complete"
+            aria-label="Abgeschlossen"></i></div><i class="ti ti-chevron-right"></i>
+      </a>
       {% endfor %}
 
     </div>

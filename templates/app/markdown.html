@@ -10,7 +10,7 @@
 
 {% block content %}
 {% macro render_tree(entries) %}
-  <ul class="lesson-tree-list">
+  <ul class="lesson-tree-list" >
     {% for entry in entries %}
       {% if entry.type == 'folder' %}
         <li class="lesson-tree-folder">
@@ -25,8 +25,9 @@
             <i class="ti ti-file-text" aria-hidden="true"></i>
             <span class="lesson-tree-file-name">{{ entry.name.replace('.md', '') }}</span>
             <span class="lesson-tree-status" aria-label="Lektionsstatus">
-              <i class="ti ti-check lesson-status-icon" data-status-indicator="complete" aria-label="Abgeschlossen"></i>
+              
               <i class="ti ti-star lesson-status-icon" data-status-indicator="favorite" aria-label="Favorit"></i>
+              <i class="ti ti-check lesson-status-icon" data-status-indicator="complete" aria-label="Abgeschlossen"></i>
             </span>
           </a>
         </li>
@@ -39,7 +40,7 @@
   <button class="lesson-sidebar-toggle" type="button" aria-expanded="false" aria-controls="lesson-sidebar">
     <i class="ti ti-list" aria-hidden="true"></i> Lektionen
   </button>
-  <aside class="lesson-sidebar" id="lesson-sidebar" aria-label="Lektionsübersicht">
+  <aside class="lesson-sidebar  {{ ' hidden 'if hide_sidebar else ' ' }} " id="lesson-sidebar" aria-label="Lektionsübersicht">
     <div class="lesson-sidebar-heading">
       <span class="home-kicker">Lernpfad</span>
       <button class="lesson-sidebar-close" type="button" aria-label="Lektionsübersicht schließen"><i class="ti ti-x" aria-hidden="true"></i></button>
