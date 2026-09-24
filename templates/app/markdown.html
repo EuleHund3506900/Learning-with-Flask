@@ -9,29 +9,67 @@
 {% endblock %}
 
 {% block content %}
-<div class="lesson-header">
-  <h2 class="lesson-title">{{ file_name.replace(".md", "") }}</h2>
-  <div class="lesson-header-buttons">
-    <button class="ghost reset-button hidden"><i class="ti ti-reload"></i> Fortschritt zurücksetzen</button>
-    <button class="ghost favourite"><i class="ti ti-star"></i>  Favorit</button>
-    <button class="outline" onClick="window.history.back()">Zurück</button>
-    
-    {% if show_navigation %}
-      <button class="full">Weiter</button>
-    {% endif %}
+{% macro render_tree(entries) %}
+  <ul class="lesson-tree-list">
+    {% for entry in entries %}
+      {% if entry.type == 'folder' %}
+        <li class="lesson-tree-folder">
+          <details {% if entry.path in filepath %}open{% endif %}>
+            <summary><i class="ti ti-chevron-right" aria-hidden="true"></i><i class="ti ti-folder" aria-hidden="true"></i><span>{{ entry.name }}</span></summary>
+            {{ render_tree(entry.children) }}
+          </details>
+        </li>
+      {% else %}
+        <li>
+          <a class="lesson-tree-file {% if entry.path == filepath %}is-current{% endif %}" href="{{ url_for('app.file', filepath=entry.path) }}" data-filepath="{{ entry.path }}">
+            <i class="ti ti-file-text" aria-hidden="true"></i>
+            <span class="lesson-tree-file-name">{{ entry.name.replace('.md', '') }}</span>
+            <span class="lesson-tree-status" aria-label="Lektionsstatus">
+              <i class="ti ti-check lesson-status-icon" data-status-indicator="complete" aria-label="Abgeschlossen"></i>
+              <i class="ti ti-star lesson-status-icon" data-status-indicator="favorite" aria-label="Favorit"></i>
+            </span>
+          </a>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+{% endmacro %}
+
+<div class="lesson-shell">
+  <button class="lesson-sidebar-toggle" type="button" aria-expanded="false" aria-controls="lesson-sidebar">
+    <i class="ti ti-list" aria-hidden="true"></i> Lektionen
+  </button>
+  <aside class="lesson-sidebar" id="lesson-sidebar" aria-label="Lektionsübersicht">
+    <div class="lesson-sidebar-heading">
+      <span class="home-kicker">Lernpfad</span>
+      <button class="lesson-sidebar-close" type="button" aria-label="Lektionsübersicht schließen"><i class="ti ti-x" aria-hidden="true"></i></button>
+    </div>
+    {{ render_tree(learning_tree) }}
+  </aside>
+
+  <main class="lesson-main">
+    <header class="lesson-header">
+      <div>
+        <span class="home-kicker">Aktuelle Lektion</span>
+        <h2 class="lesson-title">{{ file_name.replace(".md", "") }}</h2>
+      </div>
+      <div class="lesson-header-buttons">
+        <button class="status-button" type="button" data-status-action="favorite" data-filepath="{{ filepath }}" aria-label="Favorit umschalten" aria-pressed="false"><i class="ti ti-star" data-status-indicator="favorite" aria-hidden="true"></i><span>Favorit</span></button>
+        <button class="outline" type="button" onClick="window.history.back()">Zurück</button>
+      </div>
+    </header>
+    <div class="markdown-limiter">
+      {{ markdown|safe }}
+    </div>
+    <footer class="lesson-footer">
+      <button class="status-button lesson-complete-button" type="button" data-status-action="complete" data-filepath="{{ filepath }}" aria-label="Lektion als abgeschlossen markieren" aria-pressed="false"><i class="ti ti-check" data-status-indicator="complete" aria-hidden="true"></i><span>Abschließen</span></button>
+      {% if show_navigation %}
+        <button class="full" type="button">Weiter</button>
+      {% endif %}
+    </footer>
   </div>
 </div>
-<div class="markdown-limiter">
-  {{ markdown|safe }}
-</div>
-<div class="lesson-footer">
-  <div></div>
-  <div>
-    <button class="full"><i class="ti ti-check"></i>  Abschließen</button>
-    {% if show_navigation %}
-      <button class="full">Weiter</button>
-    {% endif %}
-  </div>
-</div>
+<div class="lesson-sidebar-backdrop" hidden></div>
+<script src="{{ url_for('static', filename='scripts/status.js') }}"></script>
 <script src="{{ url_for('static', filename='scripts/lesson.js') }}"></script>
 {% endblock %}

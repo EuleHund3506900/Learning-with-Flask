@@ -1879,11 +1879,7 @@ span.linenos.special {
     margin: 0 auto;
 }
 
-@media (min-width: 768px) {
-    .gist-file {
-    max-width: 60%; 
-    }
-}
+
 
 .markdown-limiter {
     padding: 1.5rem;

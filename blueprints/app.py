@@ -3,7 +3,7 @@ import os
 from flask import Blueprint, render_template
 import gh_md_to_html
 
-from blueprints.utils.files import discover_files_in_directory, discover_folders_in_directory
+from blueprints.utils.files import discover_files_in_directory, discover_folders_in_directory, discover_learning_tree
 
 app_bp = Blueprint('app', __name__, url_prefix='/app')
 
@@ -41,7 +41,16 @@ def file(filepath):
   # Parse the HTML to extract the content within the first <div> tag and remove the head
   parsedHTML = "<"+ html.replace(html.split('div')[0], "")
 
-  return render_template('app/markdown.html', markdown=(parsedHTML), file_name=file_name)
+  tree_path = 'local_data/Learning/' + filepath.split("Learning/")[1].split("/")[0]
+  learning_tree = discover_learning_tree(tree_path)
+
+  return render_template(
+    'app/markdown.html',
+    markdown=parsedHTML,
+    file_name=file_name,
+    filepath=filepath,
+    learning_tree=learning_tree,
+  )
 
 @app_bp.route("/folder/<path:folderpath>")
 def folder(folderpath):
