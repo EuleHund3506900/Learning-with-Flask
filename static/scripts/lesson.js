@@ -1,6 +1,6 @@
 const star_icon = document.querySelector(" .ti-star");
 
-const favorite_button = document.querySelector(".ghost");
+const favorite_button = document.querySelector(".favourite");
 
 const complete_button = document.querySelector(".full");
 

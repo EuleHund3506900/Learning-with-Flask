@@ -13,6 +13,7 @@
   <h2 class="lesson-title">{{ file_name.replace(".md", "") }}</h2>
   <div>
     <button class="ghost reset-button hidden"><i class="ti ti-reload"></i> Fortschritt zurücksetzen</button>
+    <button class="ghost favourite"><i class="ti ti-star"></i>  Favorit</button>
     <button class="outline" onClick="window.history.back()">Zurück</button>
     
     {% if show_navigation %}
@@ -26,7 +27,6 @@
 <div class="lesson-footer">
   <div></div>
   <div>
-    <button class="ghost"><i class="ti ti-star"></i>  Favorit</button>
     <button class="full"><i class="ti ti-check"></i>  Abschließen</button>
     {% if show_navigation %}
       <button class="full">Weiter</button>
