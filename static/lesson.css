@@ -6,6 +6,19 @@
     border: rgb(216, 216, 216) 1px solid;
     border-radius: 0.2rem;
 
+
+}
+.lesson-header-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.lesson-title{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .lesson-footer {

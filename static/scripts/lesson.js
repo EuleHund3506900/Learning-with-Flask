@@ -25,10 +25,14 @@ favorite_button.addEventListener("click", () => {
   if (star_icon.classList.contains("ti-star")) {
     star_icon.classList.remove("ti-star");
     star_icon.classList.add("ti-check");
+    window.navigation.back();
+    window.navigation.reload();
     local_storage.setItem(window.location.pathname.split("/file/")[1] + "++favorite", "true");
   } else {
     star_icon.classList.remove("ti-check");
     star_icon.classList.add("ti-star");
+    window.navigation.back();
+    window.navigation.reload();
     local_storage.removeItem(window.location.pathname.split("/file/")[1] + "++favorite");
   }
 
@@ -39,6 +43,7 @@ complete_button.addEventListener("click", () => {
     complete_button.innerHTML = "<i class='ti ti-reload'></i> Status zurücksetzten ";
     local_storage.setItem(window.location.pathname.split("/file/")[1] + "++complete", "true");
     window.navigation.back();
+    window.navigation.reload();
   } else {
     complete_button.innerHTML = "<i class='ti ti-check'></i> Abschließen";
     local_storage.removeItem(window.location.pathname.split("/file/")[1] + "++complete");

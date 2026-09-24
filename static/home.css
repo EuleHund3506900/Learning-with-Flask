@@ -8,7 +8,7 @@
 .container {
 
     display: grid;
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: 3fr 2fr;
     grid-template-rows: repeat(auto-fit, 1fr);
     gap: 20px;
     padding: 1rem;
@@ -79,6 +79,39 @@ a.file:hover {
 i.file {
     margin-right: 0.5rem;
 }
+
+
+.file-name {
+    display: flex;
+    width: 60%;
+    text-align: left;
+
+}
+.file-name > p {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.lesson-complete, .lesson-favorite {
+    border-radius: 50%;
+    font-size: 0.8rem;
+    padding: 0.2rem;
+}
+
+.badge {
+    margin-right: 4px;
+    display: inline-block;
+    padding: 0.25em 0.4em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+    background-color: var(--color-shades-300);
+    color: var(--color-tints-0);
+}
+
 
 @media (min-width: 768px) {
     .container {

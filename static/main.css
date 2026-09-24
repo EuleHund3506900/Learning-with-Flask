@@ -100,6 +100,7 @@ button.outline {
     border-radius: 0.2rem;
     cursor: pointer;
     transition: all 0.1s ease-in-out;
+    height: fit-content;
 }
 
 button.outline:hover {
