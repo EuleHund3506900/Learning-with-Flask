@@ -13,7 +13,7 @@ Für die lokale Entwicklung werden benötigt:
 Prüfe die Installationen mit:
 
 ```bash
-python3.13 --version
+python3 --version
 git --version
 ```
 
@@ -29,6 +29,7 @@ git --version
 2. Lerninhalte lokal klonen
 
     ```bash
+    mkdir local_data
     cd local_data
     git clone https://github.com/bh2005/Learning.git
     cd ..
@@ -36,21 +37,21 @@ git --version
 3. Virtuelle Umgebung mit Python 3.13 erstellen:
 
 	```bash
-	python3.13 -m venv .venv
-	source .venv/bin/activate
+	python3 -m venv .
+	source ./bin/activate
 	```
 
 	Unter Windows wird die virtuelle Umgebung mit folgendem Befehl aktiviert:
 
 	```powershell
-	.venv\Scripts\Activate.ps1
+	.\Scripts\Activate.ps1
 	```
 
 4. Abhängigkeiten installieren:
 
 	```bash
-	python -m pip install --upgrade pip
-	python -m pip install -r requirments.txt
+	./bin/python3 -m pip install --upgrade pip
+	./bin/python3 -m pip install -r requirments.txt
 	```
 
 	Die Datei heißt im aktuellen Projekt bewusst `requirments.txt`.
