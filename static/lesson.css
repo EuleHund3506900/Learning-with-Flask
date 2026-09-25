@@ -38,6 +38,10 @@
     text-transform: uppercase;
 }
 
+.home-kicker {
+    max-width: 80%;
+}
+
 .lesson-sidebar-close,
 .lesson-sidebar-toggle {
     display: none;
@@ -147,7 +151,12 @@
 }
 
 .lesson-header {
+    max-width: 100%;
     border-radius: 0.65rem 0.65rem 0 0;
+}
+
+.lesson-header-info {
+    max-width: calc(100% - 12rem);
 }
 
 .lesson-footer {
@@ -162,6 +171,9 @@
     color: var(--color-shades-200);
     font-size: clamp(1.4rem, 3vw, 2.1rem);
     line-height: 1.15;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .lesson-header-buttons {
@@ -212,6 +224,10 @@
     .lesson-shell {
         display: block;
         padding-top: 1rem;
+    }
+
+    .lesson-header-info {
+        max-width: 100%;
     }
 
     .lesson-sidebar-toggle {
