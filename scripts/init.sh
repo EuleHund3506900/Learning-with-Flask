@@ -1,4 +1,5 @@
 #!/bin/bash
+locate
 
 mkdir local_data
 cd local_data
