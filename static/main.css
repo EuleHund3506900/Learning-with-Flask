@@ -133,6 +133,58 @@ button.full:disabled:hover {
     min-height: calc(100vh - 3.5rem);
 }
 
+.dropdown {
+  position: relative;
+}
+
+.dropbtn {
+  background-color: transparent;
+  padding: 0.5rem 1rem;
+  color: white;
+  border: none;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+   border-radius: 0.35rem;
+   transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 40px;
+  left: -25%;
+  background-color: #f9f9f9;
+  border-radius: 0.35rem;
+  min-width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  border-color: rgba(233, 242, 251, 0.3);
+    background: rgba(233, 242, 251, 0.12);
+  border-radius: 0.35rem;
+  box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.1);
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+    border-color: rgba(233, 242, 251, 0.3);
+    background: rgba(233, 242, 251, 0.12);
+    color: #ffffff;
+    outline: none;
+}
+
 @media (max-width: 30rem) {
     nav.main-nav {
         padding-right: 0.75rem;

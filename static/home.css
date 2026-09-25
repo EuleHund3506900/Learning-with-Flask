@@ -243,11 +243,11 @@ i.file {
 
 .file-name {
     display: flex;
-    width: 60%;
+    width: 90%;
     text-align: left;
 
 }
-.file-name > p {
+.file-name > p, .file-name > span {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;

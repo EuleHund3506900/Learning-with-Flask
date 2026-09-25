@@ -1,6 +1,8 @@
 <!DOCTYPE html>
+<html lang="de">
 
 <head>
+    <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='tabler-icons-300.min.css') }}">
@@ -13,6 +15,14 @@
             <h1 class="nav-brand">Learning</h1>
             <a class="nav-link nav-icon-link" href="{{ url_for('app.home') }}" aria-label="Startseite"><i class="ti ti-home" aria-hidden="true"></i></a>
             <a class="nav-link" href="{{ url_for('app.courses') }}">Kurse</a>
+            <div class="dropdown">
+                <button class="dropbtn">Favoriten</button>
+                <div class="dropdown-content">
+                    <a href="#">Link 1</a>
+                    <a href="#">Link 2</a>
+                    <a href="#">Link 3</a>
+                </div>
+            </div>
         </div>
         <div class="nav-header">
             <a class="nav-link nav-icon-link" href="{{ url_for('auth.login') }}" aria-label="Profil"><i class="ti ti-user" aria-hidden="true"></i></a>
@@ -29,4 +39,5 @@
         {% endfor %}
         {% block content %}{% endblock %}
     </section>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
 </body>

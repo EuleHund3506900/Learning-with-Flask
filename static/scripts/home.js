@@ -2,12 +2,25 @@ const favorite_Content = document.querySelector('.favorite-content');
 
 const ls = window.localStorage;
 
+const decodePathPart = (value) => {
+    try {
+        return decodeURIComponent(value);
+    } catch {
+        return value;
+    }
+};
+
+const getDisplayName = (path) => {
+    const fileName = decodePathPart(path.split('/').pop() || '');
+    return fileName.replace('.md', '').replace(fileName.replace('.md', '').split('_')[0] + '_', '');
+};
+
 const favorites = ls.length > 0 ? Object.keys(ls).filter(key => key.endsWith('++favorite') && ls.getItem(key) === 'true') : [];
 
 if (favorite_Content && favorites.length > 0) {
     favorites.forEach(favorite => {
         const fileName = favorite.split('++')[0];
-        const displayName = fileName.split('/').pop().replace('.md', '').replace(fileName.split('/').pop().replace('.md', '').split('_')[0] + '_', '');
+        const displayName = getDisplayName(fileName);
         const fileLink = `/app/file/${fileName}`;
         const favoriteItem = document.createElement('a');
         favoriteItem.classList.add('file');
@@ -22,8 +35,8 @@ if (favorite_Content && favorites.length > 0) {
 
 const lastLessonButton = document.querySelector('.last-lesson');
 const lastLessonPath = ls.getItem('last-lesson');
-const lastLessonName = lastLessonPath ? lastLessonPath.split('/').pop().replace('.md', '').replace(lastLessonPath.split('/').pop().replace('.md', '').split('_')[0] + '_', '') : null;
-const lastLessonCourse = lastLessonPath ? lastLessonPath.split('Learning/')[1].split('/')[0] : null;
+const lastLessonName = lastLessonPath ? getDisplayName(lastLessonPath) : null;
+const lastLessonCourse = lastLessonPath ? decodePathPart(lastLessonPath.split('Learning/')[1].split('/')[0]) : null;
 if (lastLessonButton && lastLessonPath) {
     lastLessonButton.setAttribute('href', lastLessonPath);
     lastLessonButton.innerHTML = `${lastLessonCourse} - ${lastLessonName} <i class="ti ti-arrow-up-right" aria-hidden="true"></i>`;
