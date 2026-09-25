@@ -18,3 +18,7 @@ document.querySelectorAll(".lesson-tree-folder details").forEach((folder) => {
         folder.closest(".lesson-tree-folder").classList.toggle("is-open", folder.open);
     });
 });
+
+const ls = localStorage;
+
+ls.setItem("last-lesson", window.location.pathname);

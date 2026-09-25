@@ -19,3 +19,15 @@ if (favorite_Content && favorites.length > 0) {
 } else if (favorite_Content) {
     favorite_Content.innerHTML = '<p>Du hast noch keine Favoriten hinzugefügt.</p>';
 }
+
+const lastLessonButton = document.querySelector('.last-lesson');
+const lastLessonPath = ls.getItem('last-lesson');
+const lastLessonName = lastLessonPath ? lastLessonPath.split('/').pop().replace('.md', '').replace(lastLessonPath.split('/').pop().replace('.md', '').split('_')[0] + '_', '') : null;
+const lastLessonCourse = lastLessonPath ? lastLessonPath.split('Learning/')[1].split('/')[0] : null;
+if (lastLessonButton && lastLessonPath) {
+    lastLessonButton.setAttribute('href', lastLessonPath);
+    lastLessonButton.innerHTML = `${lastLessonCourse} - ${lastLessonName} <i class="ti ti-arrow-up-right" aria-hidden="true"></i>`;
+} else if (lastLessonButton) {
+    lastLessonButton.setAttribute('href', '/app/home');
+    lastLessonButton.innerHTML = 'Du hast noch keine Lektionen begonnen <i class="ti ti-arrow-up-right" aria-hidden="true"></i>';
+}
