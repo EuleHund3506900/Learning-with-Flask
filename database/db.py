@@ -2,6 +2,9 @@ import sqlite3
 
 import bcrypt
 
+import logging
+logger = logging.getLogger(__name__)
+
 def init_db():
     conn = sqlite3.connect('database/development.db')
     cursor = conn.cursor()
@@ -28,7 +31,9 @@ def create_user(name, password, email):
     result = cursor.fetchone()
     if result is None:
         return "error"
-    user = result[0]
+    user = result
+
+    logger.info(f"User {user[0]} created successfully.")
 
     conn.commit()
     conn.close()
@@ -51,7 +56,8 @@ def verify_user(email, password):
         if result is None:
             return False
         conn.close()
-        return result[0]
+        logger.info(f"User {str(result[0])} verified successfully.")
+        return result
 
     conn.close()
     return (False)

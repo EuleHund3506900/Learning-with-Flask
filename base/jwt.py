@@ -13,11 +13,16 @@ from jwt import (
 )
 from jwt.utils import get_int_from_datetime
 
+import logging
+logger = logging.getLogger(__name__)
+
 
 def init_rsa_keys():
     if(not os.path.exists('secrets/private_key.pem') or not os.path.exists('secrets/public_key.pub')):
+        logger.info("RSA keys do not exist. Generating new keys...")
 
         os.mkdir('secrets') if not os.path.exists('secrets') else None
+
 
         private_key = rsa.generate_private_key(
             public_exponent=65537,
@@ -43,6 +48,10 @@ def init_rsa_keys():
         public_key_file = open("secrets/public_key.pub", "w")
         public_key_file.write(pem_public_key.decode())
         public_key_file.close()
+
+        logger.info("RSA keys generated and saved to 'secrets/private_key.pem' and 'secrets/public_key.pub'.")
+    else:
+        logger.info("RSA keys already exist. Skipping generation.")
 
 def load_private_rsa_key():
     private_key_pass = os.getenv("RSA_PASSWORD").encode()
@@ -98,8 +107,8 @@ def verify_jwt(token):
         print(f"JWT verification failed: {e}")
         return None
 
-def make_jwt_payload(user_id, expiration_minutes=60,):
-    expiration_time = datetime.now(timezone.utc) + timedelta(minutes=expiration_minutes)
+def make_jwt_payload(user_id,):
+    expiration_time = datetime.now(timezone.utc) + timedelta( hours=int(os.getenv("LOGIN_ROTATION_DURATION", 1)),)
     payload = {
         "user_id": user_id,
         "exp": get_int_from_datetime(expiration_time)

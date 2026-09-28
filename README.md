@@ -1,4 +1,4 @@
- # Learning with Flask
+# Learning with Flask
 
 Eine Flask-Webanwendung zum Speichern der Fortschritte bei den Lerninhalte aus der [Learning Repository](https://github.com/bh2005/Learning) von bh2005.
 
@@ -60,7 +60,8 @@ git --version
 
 Bevor die Anwendung gestartet werden kann, müssen folgende Umgebungsvariablen in der Datei `.env` gesetzt werden:
 ```env
-RSA_PASSWORD="Random complicated string"
+RSA_PASSWORD="Random complicated string" # required by the authentication
+LOGIN_ROTATION_DURATION=12 # in hours - optional, default is 1
 ```
 
 Nach der Aktivierung der virtuellen Umgebung kann die Anwendung gestartet werden:
