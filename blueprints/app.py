@@ -4,6 +4,7 @@ from flask import Blueprint, render_template
 import gh_md_to_html
 
 from blueprints.utils.files import discover_files_in_directory, discover_folders_in_directory, discover_learning_tree
+from blueprints.utils.middleware import require_authentication
 
 app_bp = Blueprint('app', __name__, url_prefix='/app')
 
@@ -75,6 +76,12 @@ def folder(folderpath):
 
   return render_template('app/folder.html', folder_name=folder_name, files=files, folders=folders)
 
+
+
 @app_bp.route('/profile') 
 def profile():
-  return render_template('app/profile.html', name="test")
+  @require_authentication
+  def render():
+    return render_template('app/profile.html', name="Login successful")
+
+  return render()

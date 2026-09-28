@@ -58,6 +58,11 @@ git --version
 
 ## Anwendung starten
 
+Bevor die Anwendung gestartet werden kann, müssen folgende Umgebungsvariablen gesetzt werden:
+```env
+RSA_PASSWORD="Random complicated string"
+```
+
 Nach der Aktivierung der virtuellen Umgebung kann die Anwendung gestartet werden:
 
 ```bash

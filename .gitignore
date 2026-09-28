@@ -8,3 +8,5 @@ pyvenv.cfg
 __pycache__
 local_data/Learning
 *.db
+secrets
+*.env

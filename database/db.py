@@ -23,19 +23,35 @@ def create_user(name, password, email):
     except sqlite3.IntegrityError as e:
         print(f"Error creating user: {e}")
         return "error"
+
+    cursor.execute("SELECT id, name, email FROM user WHERE email = ?", (email,))
+    result = cursor.fetchone()
+    if result is None:
+        return "error"
+    user = result[0]
+
     conn.commit()
     conn.close()
-    return "success"
+    return user
 
 def verify_user(email, password):
     conn = sqlite3.connect('database/development.db')
     cursor = conn.cursor()
     cursor.execute("SELECT password FROM user WHERE email = ?", (email,))
     result = cursor.fetchone()
-    conn.close()
 
     if result is None:
         return False
 
     stored_password = result[0].encode('utf-8')
-    return bcrypt.checkpw(password.encode('utf-8'), stored_password)
+
+    if bcrypt.checkpw(password.encode('utf-8'), stored_password):
+        cursor.execute("SELECT id, name, email FROM user WHERE email = ?", (email,))
+        result = cursor.fetchone()
+        if result is None:
+            return False
+        conn.close()
+        return result[0]
+
+    conn.close()
+    return (False)

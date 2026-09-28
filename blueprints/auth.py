@@ -1,9 +1,11 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, make_response, render_template, request, redirect, url_for
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, SelectField
 from wtforms.validators import DataRequired, NumberRange, Length
 
-from database.db import create_user
+from database.db import create_user, verify_user
+
+from base.jwt import make_jwt_payload, sign_jwt
 
 auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
 
@@ -15,8 +17,12 @@ def register():
         email = request.form['email']
 
         result = create_user(name, password, email)
-        if result == "success":
-            return redirect(url_for('app.profile'))
+        if result != "error":
+            res = make_response(redirect(url_for('auth.login')))
+            payload = make_jwt_payload(result)
+            token = sign_jwt(payload)
+            res.set_cookie('token', token, httponly=True, samesite='Strict',)
+            return res
         else:
             return render_template('auth/register.html', error="Es ist ein fehler aufgetreten. Bitte versuche es erneut.")
 
@@ -26,11 +32,14 @@ def register():
 def login():
     if request.method == 'POST':
         email = request.form['email']
-        password = request.form['password']
-
-        from database.db import verify_user
-        if verify_user(email, password):
-            return redirect(url_for('app.profile'))
+        password = request.form['password']      
+        user = verify_user(email, password)
+        if user != False:
+            res = make_response(redirect(url_for('app.profile')))
+            payload = make_jwt_payload(user)
+            token = sign_jwt(payload)
+            res.set_cookie('token', token, httponly=True, samesite='Strict')
+            return res
         else:
             return render_template('auth/login.html', error="Passwort und E-Mail stimmen nicht überein. Bitte versuche es erneut.")
 

@@ -1,10 +1,17 @@
 from flask import Flask, render_template, redirect, url_for
+from base.errorhandler import ErrorHandler
 from blueprints.app import app_bp
 from blueprints.dev import dev_bp
 from blueprints.auth import auth_bp
+from base.jwt import init_rsa_keys
 from database.db import create_user, init_db, verify_user
+from dotenv import load_dotenv
+
+load_dotenv()  # reads variables from a .env file and sets them in os.environ
+
 
 app = Flask(__name__)
+ErrorHandler(app)
 
 
 @app.route("/")
@@ -32,4 +39,5 @@ app.register_blueprint(auth_bp)
 
 if __name__ == "__main__":
   init_db()
+  init_rsa_keys()
   app.run(debug=True)
