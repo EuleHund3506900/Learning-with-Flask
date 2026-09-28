@@ -97,7 +97,7 @@ data/                     Beispieldateien
 ## TODO
 
 - [ ] SQLite-Speicher für Lernfortschritte, erledigte Lektionen und Kursstatus
-- [ ] Authentifizierte Sessions mit JWT
+- [x] Authentifizierte Sessions mit JWT
 - [ ] Geschützte Routen und Zugriffskontrolle für Benutzerbereiche
 - [ ] Persistente Profil- und Benutzereinstellungen
 - [ ] Fortschritt in der Oberfläche anzeigen und aktualisieren
