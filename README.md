@@ -58,7 +58,7 @@ git --version
 
 ## Anwendung starten
 
-Bevor die Anwendung gestartet werden kann, müssen folgende Umgebungsvariablen gesetzt werden:
+Bevor die Anwendung gestartet werden kann, müssen folgende Umgebungsvariablen in der Datei `.env` gesetzt werden:
 ```env
 RSA_PASSWORD="Random complicated string"
 ```
