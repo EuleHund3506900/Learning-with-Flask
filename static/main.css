@@ -152,7 +152,6 @@ button.full:disabled:hover {
 .dropdown-content {
   display: none;
   position: absolute;
-  top: 40px;
   left: -25%;
   background-color: #f9f9f9;
   border-radius: 0.35rem;

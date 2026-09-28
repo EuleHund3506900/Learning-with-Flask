@@ -2,6 +2,12 @@ const favorite_Content = document.querySelector('.favorite-content');
 
 const ls = window.localStorage;
 
+const favorites = ls.length > 0 ? Object.keys(ls).filter(key => key.endsWith('++favorite') && ls.getItem(key) === 'true') : [];
+
+
+
+function init() {
+    
 const decodePathPart = (value) => {
     try {
         return decodeURIComponent(value);
@@ -15,10 +21,11 @@ const getDisplayName = (path) => {
     return fileName.replace('.md', '').replace(fileName.replace('.md', '').split('_')[0] + '_', '');
 };
 
-const favorites = ls.length > 0 ? Object.keys(ls).filter(key => key.endsWith('++favorite') && ls.getItem(key) === 'true') : [];
-
 if (favorite_Content && favorites.length > 0) {
-    favorites.forEach(favorite => {
+    favorites.forEach((favorite, index) => {
+        if(index > 3) {
+            return;
+        }
         const fileName = favorite.split('++')[0];
         const displayName = getDisplayName(fileName);
         const fileLink = `/app/file/${fileName}`;
@@ -44,3 +51,6 @@ if (lastLessonButton && lastLessonPath) {
     lastLessonButton.setAttribute('href', '/app/home');
     lastLessonButton.innerHTML = 'Du hast noch keine Lektionen begonnen <i class="ti ti-arrow-up-right" aria-hidden="true"></i>';
 }
+}
+
+init();

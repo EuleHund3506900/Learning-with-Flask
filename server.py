@@ -10,7 +10,7 @@ app = Flask(__name__)
 @app.route("/")
 def hello():
   res = verify_user("test3@example.com", "password1233")
-  return str(res)
+  return redirect(url_for('app.home'))
 
 
 @app.route("/auth/register/")
