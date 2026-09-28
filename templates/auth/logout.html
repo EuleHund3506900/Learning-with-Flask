@@ -1,0 +1,30 @@
+{% extends 'main.html' %}
+
+
+
+  {% block title %}Erfolgreich abgemeldet{% endblock %}
+
+  {% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='auth.css') }}">
+  {% endblock %}
+
+
+{% block content %}
+  <main class="auth-page">
+    <section class="auth-panel logout-panel" aria-labelledby="register-title">
+      <div class="auth-intro">
+        <h2 id="register-title">Erfolgreich abgemeldet</h2>
+        <p>Du hast dich erfolgreich abgemeldet. Bis zum nächsten Mal!</p>
+      </div>
+
+      {% if error %}
+        <p class="auth-error" role="alert">{{ error }}</p>
+      {% endif %}
+
+      
+        <button class="auth-submit" onClick="window.location.href='{{ url_for('auth.login') }}'">Erneut anmelden <i class="ti ti-arrow-right" aria-hidden="true"></i></button>
+      </form>
+      <p class="auth-footer">Noch kein Konto? <a href="{{ url_for('auth.register') }}">Hier registrieren</a></p>
+    </section>
+  </main>
+{% endblock %}

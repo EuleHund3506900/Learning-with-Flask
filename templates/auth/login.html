@@ -1,38 +1,48 @@
-{% extends 'main.html' %}
+{% extends 'main.html' %} {% block title %}Anmelden{% endblock %} {% block head
+%}
+<link rel="stylesheet" href="{{ url_for('static', filename='auth.css') }}" />
+{% endblock %} {% block content %}
+<main class="auth-page">
+  <section class="auth-panel" aria-labelledby="register-title">
+    <div class="auth-intro">
+      <span class="auth-kicker">Learning platform</span>
+      <h2 id="register-title">Willkommen zurück</h2>
+      <p>Melde dich an und mache dort weiter wo du aufgehört hast.</p>
+    </div>
 
+    {% if error %}
+    <p class="auth-error" role="alert">{{ error }}</p>
+    {% endif %}
 
-  {% block title %}Anmelden{% endblock %}
-
-  {% block head %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='auth.css') }}">
-  {% endblock %}
-
-
-{% block content %}
-  <main class="auth-page">
-    <section class="auth-panel" aria-labelledby="register-title">
-      <div class="auth-intro">
-        <span class="auth-kicker">Learning platform</span>
-        <h2 id="register-title">Willkommen zurück</h2>
-        <p>Melde dich an und mache dort weiter wo du aufgehört hast.</p>
+    <form class="auth-form" method="post" action="{{ url_for('auth.login') }}">
+      <div class="form-field">
+        <label for="email">E-Mail</label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          autocomplete="email"
+          required
+        />
       </div>
-
-      {% if error %}
-        <p class="auth-error" role="alert">{{ error }}</p>
-      {% endif %}
-
-      <form class="auth-form" method="post" action="{{ url_for('auth.login') }}">
-        <div class="form-field">
-          <label for="email">E-Mail</label>
-          <input type="email" name="email" id="email" autocomplete="email" required>
-        </div>
-        <div class="form-field">
-          <label for="password">Passwort</label>
-          <input type="password" name="password" id="password" autocomplete="off" required>
-        </div>
-        <button class="auth-submit" type="submit">Anmelden <i class="ti ti-arrow-right" aria-hidden="true"></i></button>
-      </form>
-      <p class="auth-footer">Noch kein Konto? <a href="{{ url_for('auth.register') }}">Hier registrieren</a></p>
-    </section>
-  </main>
+      <div class="form-field">
+        <label for="password">Passwort</label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          autocomplete="off"
+          required
+        />
+      </div>
+      <button class="auth-submit" type="submit">
+        Anmelden <i class="ti ti-arrow-right" aria-hidden="true"></i>
+      </button>
+    </form>
+    <p class="auth-footer">
+      Noch kein Konto?
+      <a href="{{ url_for('auth.register') }}">Hier registrieren</a>
+    </p>
+  </section>
+</main>
 {% endblock %}

@@ -8,5 +8,33 @@
 {% endblock %}
 
 {% block content %}
-  {{ name }}
+  <main class="profile-page">
+    <section class="profile-panel" aria-labelledby="profile-title">
+      <div class="profile-heading">
+        <div class="profile-avatar" aria-hidden="true">{{ user.name[:1]|upper }}</div>
+        <div>
+          <p class="profile-kicker">Dein Konto</p>
+          <h2 id="profile-title">{{ user.name }}</h2>
+        </div>
+      </div>
+
+      <dl class="profile-details">
+        <div class="profile-detail">
+          <dt>Name</dt>
+          <dd>{{ user.name }}</dd>
+        </div>
+        <div class="profile-detail">
+          <dt>E-Mail</dt>
+          <dd>{{ user.email }}</dd>
+        </div>
+      </dl>
+
+      <form class="profile-actions" method="post" action="{{ url_for('auth.logout') }}">
+        <button class="profile-logout" type="submit">
+          <i class="ti ti-logout" aria-hidden="true"></i>
+          Abmelden
+        </button>
+      </form>
+    </section>
+  </main>
 {% endblock %}

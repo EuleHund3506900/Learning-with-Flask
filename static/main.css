@@ -43,6 +43,7 @@ body {
 nav.main-nav {
     display: flex;
     min-height: 3.5rem;
+    max-height: 3.5rem;
     position: sticky;
     top: 0;
     z-index: 1000;

@@ -55,3 +55,19 @@ def verify_user(email, password):
 
     conn.close()
     return (False)
+
+def get_user_by_id(user_id):
+    conn = sqlite3.connect('database/development.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT id, name, email FROM user WHERE id = ?", (user_id,))
+    result = cursor.fetchone()
+    conn.close()
+
+    if result is None:
+        return None
+
+    return {
+        "id": result[0],
+        "name": result[1],
+        "email": result[2],
+    }

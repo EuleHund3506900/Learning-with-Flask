@@ -44,3 +44,13 @@ def login():
             return render_template('auth/login.html', error="Passwort und E-Mail stimmen nicht überein. Bitte versuche es erneut.")
 
     return render_template('auth/login.html')
+
+@auth_bp.route('/logout', methods=['POST'])
+def logout():
+    res = make_response(redirect(url_for('auth.logout_success')))
+    res.delete_cookie('token')
+    return res
+
+@auth_bp.route('/logout_success', methods=['GET'])
+def logout_success():
+    return render_template('auth/logout.html')

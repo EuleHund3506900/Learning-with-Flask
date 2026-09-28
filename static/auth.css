@@ -1,6 +1,6 @@
 .auth-page {
 	display: grid;
-	min-height: calc(100vh - 3.5rem);
+	min-height: calc(85dvh - 3.5rem);
 	place-items: center;
 	padding: clamp(2rem, 6vw, 5rem) 1.25rem;
 	background:
@@ -19,6 +19,18 @@
 
 .auth-intro {
 	margin-bottom: 2rem;
+}
+
+.logout-panel {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+
+.logout-panel button {
+	width: 100%;
 }
 
 .auth-kicker {
