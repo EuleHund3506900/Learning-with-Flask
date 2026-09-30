@@ -6,6 +6,7 @@
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='tabler-icons-300.min.css') }}">
+    <script src="{{ url_for('static', filename='scripts/favorites-api.js') }}"></script>
     {% block head %} {% endblock %}
 </head>
 

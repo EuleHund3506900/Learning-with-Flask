@@ -77,3 +77,89 @@ def get_user_by_id(user_id):
         "name": result[1],
         "email": result[2],
     }
+
+def get_favorites_by_user(user_id):
+    conn = sqlite3.connect('database/development.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT id, item_url FROM favorite WHERE user_id = ? ORDER BY id", (user_id,))
+    favorites = cursor.fetchall()
+    conn.close()
+
+    return [{"id": favorite[0], "item_url": favorite[1]} for favorite in favorites]
+
+def create_favorite(user_id, item_url):
+    conn = sqlite3.connect('database/development.db')
+    cursor = conn.cursor()
+    cursor.execute(
+        "SELECT id, item_url FROM favorite WHERE user_id = ? AND item_url = ?",
+        (user_id, item_url),
+    )
+    existing_favorite = cursor.fetchone()
+
+    if existing_favorite is not None:
+        conn.close()
+        return {"id": existing_favorite[0], "item_url": existing_favorite[1]}, False
+
+    cursor.execute(
+        "INSERT INTO favorite (user_id, item_url) VALUES (?, ?)",
+        (user_id, item_url),
+    )
+    favorite_id = cursor.lastrowid
+    conn.commit()
+    conn.close()
+    return {"id": favorite_id, "item_url": item_url}, True
+
+def delete_favorite(user_id, item_url):
+    conn = sqlite3.connect('database/development.db')
+    cursor = conn.cursor()
+    cursor.execute(
+        "DELETE FROM favorite WHERE user_id = ? AND item_url = ?",
+        (user_id, item_url),
+    )
+    deleted = cursor.rowcount > 0
+    conn.commit()
+    conn.close()
+    return deleted
+
+def get_completed_by_user(user_id):
+    conn = sqlite3.connect('database/development.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT id, item_url FROM completed WHERE user_id = ? ORDER BY id", (user_id,))
+    completed = cursor.fetchall()
+    conn.close()
+
+    return [{"id": item[0], "item_url": item[1]} for item in completed]
+
+def create_completed(user_id, item_url):
+    conn = sqlite3.connect('database/development.db')
+    cursor = conn.cursor()
+    cursor.execute(
+        "SELECT id, item_url FROM completed WHERE user_id = ? AND item_url = ?",
+        (user_id, item_url),
+    )
+    existing_item = cursor.fetchone()
+
+    if existing_item is not None:
+        conn.close()
+        return {"id": existing_item[0], "item_url": existing_item[1]}, False
+
+    cursor.execute(
+        "INSERT INTO completed (user_id, item_url) VALUES (?, ?)",
+        (user_id, item_url),
+    )
+    completed_id = cursor.lastrowid
+    conn.commit()
+    conn.close()
+    return {"id": completed_id, "item_url": item_url}, True
+
+def delete_completed(user_id, item_url):
+    conn = sqlite3.connect('database/development.db')
+    cursor = conn.cursor()
+    cursor.execute(
+        "DELETE FROM completed WHERE user_id = ? AND item_url = ?",
+        (user_id, item_url),
+    )
+    deleted = cursor.rowcount > 0
+    conn.commit()
+    conn.close()
+    return deleted

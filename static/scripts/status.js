@@ -7,6 +7,13 @@
 
     const isActive = (filepath, status) => storage.getItem(`${filepath}++${status}`) === "true";
 
+    const syncStatuses = async () => {
+        await Promise.all([
+            window.favoriteApi.syncFavorites().catch(() => {}),
+            window.favoriteApi.syncCompleted().catch(() => {}),
+        ]);
+    };
+
     const updateFileStatus = (filepath, status) => {
         const active = isActive(filepath, status);
         getElementsForFile(filepath).forEach((element) => {
@@ -33,7 +40,7 @@
         });
     };
 
-    document.addEventListener("click", (event) => {
+    document.addEventListener("click", async (event) => {
         const button = event.target.closest("[data-status-action]");
         if (!button) {
             return;
@@ -43,9 +50,21 @@
         const filepath = button.dataset.filepath;
         const status = button.dataset.statusAction;
         const nextValue = !isActive(filepath, status);
+
+        if (status === "favorite" || status === "complete") {
+            try {
+                const save = status === "favorite"
+                    ? window.favoriteApi.saveFavorite(filepath, nextValue)
+                    : window.favoriteApi.saveCompleted(filepath, nextValue);
+                await save;
+            } catch {
+                // Keep the local change when the API is unavailable.
+            }
+        }
+
         storage.setItem(`${filepath}++${status}`, String(nextValue));
         updateFileStatus(filepath, status);
     });
 
-    updateAllStatuses();
+    syncStatuses().finally(updateAllStatuses);
 })();

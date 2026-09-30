@@ -32,4 +32,5 @@ def require_authentication(func):
         AuthMiddleware().authenticate()
         return func(*args, **kwargs)
 
+    wrapper.__name__ = func.__name__
     return wrapper

@@ -2,12 +2,11 @@ const favorite_Content = document.querySelector('.favorite-content');
 
 const ls = window.localStorage;
 
-const favorites = ls.length > 0 ? Object.keys(ls).filter(key => key.endsWith('++favorite') && ls.getItem(key) === 'true') : [];
-
-
-
 function init() {
     
+    const favorites = Object.keys(ls)
+        .filter(key => key.endsWith('++favorite') && ls.getItem(key) === 'true');
+
 const decodePathPart = (value) => {
     try {
         return decodeURIComponent(value);
@@ -53,4 +52,6 @@ if (lastLessonButton && lastLessonPath) {
 }
 }
 
-init();
+window.favoriteApi.syncFavorites()
+    .catch(() => {})
+    .finally(init);

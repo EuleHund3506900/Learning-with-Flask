@@ -1,4 +1,5 @@
 from blueprints.app import app_bp
+from blueprints.api import api_bp
 from blueprints.dev import dev_bp
 from blueprints.auth import auth_bp
 from flask import redirect, url_for
@@ -11,6 +12,7 @@ class Router:
 
     def register_blueprints(self):
         self.app.register_blueprint(app_bp)
+        self.app.register_blueprint(api_bp)
         self.app.register_blueprint(dev_bp)
         self.app.register_blueprint(auth_bp)
 
