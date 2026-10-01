@@ -4,7 +4,7 @@ from flask import Blueprint, render_template, request
 import gh_md_to_html
 
 from base.jwt import verify_jwt
-from database.db import get_user_by_id
+from database.db import get_user_by_id, get_user_completed_lessons_count
 from blueprints.utils.files import discover_files_in_directory, discover_folders_in_directory, discover_learning_tree
 from blueprints.utils.middleware import require_authentication
 
@@ -86,6 +86,7 @@ def profile():
   def render():
     payload = verify_jwt(request.cookies.get('token'))
     user = get_user_by_id(payload['user_id'])
+    user['completed_lessons'] = get_user_completed_lessons_count(payload['user_id'])
     if user is None:
       return render_template('error.html', error_code=404, error_message="Das Benutzerkonto wurde nicht gefunden."), 404
 

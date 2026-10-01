@@ -15,12 +15,10 @@ class AuthMiddleware:
             return True
         
         except Exception as e:
-            print(f"Token verification failed: {e}")
             return False
 
     def authenticate(self):
         auth_token = request.cookies.get('token')
-        print(f"Auth token: {auth_token}")
         if not auth_token:
             raise APIException("Unauthorized", status_code=401)
         if not self.is_valid_token(auth_token):

@@ -27,6 +27,10 @@
           <dt>E-Mail</dt>
           <dd>{{ user.email }}</dd>
         </div>
+        <div class="profile-detail">
+          <dt>Abgeschlossene Lektionen</dt>
+          <dd>{{ user.completed_lessons }}</dd>
+        </div>
       </dl>
 
       <form class="profile-actions" method="post" action="{{ url_for('auth.logout') }}">

@@ -163,3 +163,16 @@ def delete_completed(user_id, item_url):
     conn.commit()
     conn.close()
     return deleted
+
+
+def get_user_completed_lessons_count(user_id):
+    conn = sqlite3.connect('database/development.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT COUNT(*) FROM completed WHERE user_id = ?", (user_id,))
+    result = cursor.fetchone()
+    conn.close()
+
+    if result is None:
+        return 0
+
+    return result[0]
