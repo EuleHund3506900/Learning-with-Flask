@@ -175,14 +175,6 @@ a.button:hover {
     margin: 0 auto;
 }
 
-.folder-container {
-
-    display: grid;
-    grid-template-rows: repeat(auto-fit, 1fr);
-    gap: 20px;
-    padding: 1rem;
-    margin: 0 auto;
-}
 
 a.button {
     display: flex;

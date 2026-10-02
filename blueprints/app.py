@@ -64,19 +64,14 @@ def folder(folderpath):
     return render_template('error.html', error_code=404, error_message="Der angeforderte Ordner wurde nicht gefunden."), 404
 
   folder_name = os.path.basename(folderpath)
-  files = discover_files_in_directory(folderpath, '.md')
-  sorted_files = sorted(zip(files['names'], files['paths']), key=lambda x: x[0])
 
-  files['names'] = [name for name, path in sorted_files]
-  files['paths'] = [path for name, path in sorted_files]
+  if folderpath.split("/")[-1] == "Learning":
+    tree_path = 'local_data/Learning/'
+  else:
+    tree_path = 'local_data/Learning/' + folderpath.split("Learning/")[1].split("/")[0]
+  learning_tree = discover_learning_tree(tree_path)
 
-  folders = discover_folders_in_directory(folderpath)
-  sorted_folders = sorted(zip(folders['names'], folders['paths']), key=lambda x: x[0])
-
-  folders['names'] = [name for name, path in sorted_folders]
-  folders['paths'] = [path for name, path in sorted_folders]
-
-  return render_template('app/folder.html', folder_name=folder_name, files=files, folders=folders)
+  return render_template('app/folder.html', folder_name=folder_name, learning_tree=learning_tree)
 
 
 

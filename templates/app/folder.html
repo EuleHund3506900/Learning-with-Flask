@@ -6,30 +6,43 @@
 
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='folder.css') }}">
 {% endblock %}
 
 {% block content %}
+{% macro render_tree(entries) %}
+  <ul class="lesson-tree-list" >
+    {% for entry in entries %}
+      {% if entry.type == 'folder' %}
+        <li class="lesson-tree-folder">
+          <details {% if entry.path in filepath %}open{% endif %}>
+            <summary><i class="ti ti-chevron-right" aria-hidden="true"></i><i class="ti ti-folder" aria-hidden="true"></i><span>{{ entry.name }}</span></summary>
+            {{ render_tree(entry.children) }}
+          </details>
+        </li>
+      {% else %}
+        <li>
+          <a class="lesson-tree-file {% if entry.path == filepath %}is-current{% endif %}" href="{{ url_for('app.file', filepath=entry.path) }}" data-filepath="{{ entry.path }}">
+            <i class="ti ti-file-text" aria-hidden="true"></i>
+            <span class="lesson-tree-file-name">{{ entry.name.replace('.md', '') }}</span>
+            <span class="lesson-tree-status" aria-label="Lektionsstatus">
+              
+              <i class="ti ti-star lesson-status-icon" data-status-indicator="favorite" aria-label="Favorit"></i>
+              <i class="ti ti-check lesson-status-icon" data-status-indicator="complete" aria-label="Abgeschlossen"></i>
+            </span>
+          </a>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+{% endmacro %}
+
+
 <div class="folder-container">
   <div>
     <div class="home-content-item">
       <button class="ghost" onClick="window.history.back()"><i class="ti ti-chevron-left"></i> Zurück</button>
-      {% for path in folders['paths'] %}
-      <a href="{{ url_for('app.folder', folderpath=path) }}" class="file">
-        <div class="file-name"><i class="ti ti-folder file"></i>
-          <p>{{ folders['names'][loop.index0] }}</p>
-        </div> <i class="ti ti-chevron-right"></i>
-      </a>
-      {% endfor %}
-      {% for path in files['paths'] %}
-      <a href="{{ url_for('app.file', filepath=path) }}" class="file file-container" data-filepath="{{ path }}">
-        <div class="file-name"><i class="ti ti-file file"></i>
-          <p>{{ files['names'][loop.index0] }}</p>
-        </div>
-        <div class="file-badge-container"><i class="ti ti-star lesson-status-icon" data-status-indicator="favorite"
-            aria-label="Favorit"></i><i class="ti ti-check lesson-status-icon" data-status-indicator="complete"
-            aria-label="Abgeschlossen"></i></div><i class="ti ti-chevron-right"></i>
-      </a>
-      {% endfor %}
+      {{ render_tree(learning_tree) }}
 
     </div>
   </div>
