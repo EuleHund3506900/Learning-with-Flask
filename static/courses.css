@@ -36,6 +36,14 @@ a.course-item:focus-visible {
     outline: none;
 }
 
+.course-item-main {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 0;
+    gap: 0.55rem;
+}
+
 .course-item-content {
     display: flex;
     flex-direction: column;
@@ -63,6 +71,37 @@ a.course-item h3 {
     font-weight: 700;
 }
 
+.course-progress-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: min(100%, 20rem);
+}
+
+.course-progress {
+    position: relative;
+    flex: 1;
+    height: 0.55rem;
+    overflow: hidden;
+    border-radius: 999px;
+    background: rgba(4, 72, 149, 0.12);
+}
+
+.course-progress-fill {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: #4f8ef7;
+}
+
+.course-progress-label {
+    min-width: 2.5rem;
+    color: var(--color-shades-300);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-align: right;
+}
+
 a.course-item i {
     font-size: 1.4rem;
     color: var(--color-shades-300);
@@ -77,5 +116,9 @@ a.course-item i {
 
     a.course-item {
         padding: 0.85rem 0.9rem;
+    }
+
+    .course-progress-row {
+        width: 100%;
     }
 }

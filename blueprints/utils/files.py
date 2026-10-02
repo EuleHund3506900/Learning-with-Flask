@@ -12,6 +12,16 @@ def discover_files(path, extension):
                 print(os.path.join(path, name))
     return file_paths
 
+def count_lectures_in_directory(path):
+    lecture_count = 0
+    for current_path, subdirs, files in os.walk(path):
+        subdirs[:] = [name for name in subdirs if not name.startswith('.')]
+        lecture_count += sum(
+            1 for name in files
+            if name.endswith('.md') and not name.startswith('.') and name not in EXCLUDED_FILES
+        )
+    return lecture_count
+
 def discover_files_in_directory(path, extension, exclude_git_files=True):
     file_information = {
             "paths": [],

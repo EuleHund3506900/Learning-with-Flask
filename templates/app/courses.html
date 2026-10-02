@@ -11,13 +11,22 @@
 {% block content %}
   <div class="courses-list-container" aria-label="Kursübersicht">
     {% for name in folder_information["names"] %}
-      <a href="{{ url_for('app.folder', folderpath=folder_information['paths'][loop.index0]) }}" class="course-item">
-        <div class="course-item-content">
-          <span class="course-badge">Kurs</span>
-          <h3>{{ name }}</h3>
+      <a href="{{ url_for('app.folder', folderpath=folder_information['paths'][loop.index0]) }}" class="course-item" data-course-path="{{ folder_information['paths'][loop.index0] }}">
+        <div class="course-item-main">
+          <div class="course-item-content">
+            <span class="course-badge">Kurs</span>
+            <h3>{{ name }}</h3>
+          </div>
+          <div class="course-progress-row">
+            <div class="course-progress" aria-label="Fortschritt" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+              <span class="course-progress-fill" style="width: 0%;"></span>
+            </div>
+            <span class="course-progress-label">0%</span>
+          </div>
         </div>
         <i class="ti ti-chevron-right" aria-hidden="true"></i>
       </a>
     {% endfor %}
   </div>
+  <script src="{{ url_for('static', filename='scripts/courses.js') }}"></script>
 {% endblock %}
