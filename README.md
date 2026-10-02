@@ -103,7 +103,12 @@ data/                     Beispieldateien
 - [x] ~~Persistente Profil- und Benutzereinstellungen~~
 - [ ] Fortschritt in der Oberfläche anzeigen und aktualisieren
 - [ ] Tests für Authentifizierung, Datenbankzugriffe und zentrale Routen
-- [ ] Produktionskonfiguration mit sicherem Secret Key und deaktiviertem Debug-Modus
+- [ ] Produktionskonfiguration mit ~~sicherem Secret Key und~~ deaktiviertem Debug-Modus
+
+## KNOWN ISSUES
+
+- Lektion: `local_data/Learning/02_Anwendungsserver/11_NTP/Konzept-NTP-remote.md` kann nicht dargestellt werden
+- Lektion: `local_data/Learning/01_Grundlagen_und_Uebungen/09_Check_MK/01_Checkmk_Einfuehrung_Grundlagen.md` kann nicht verarbeitet werden aufgrund von Link-Einbettung
 
 
 
